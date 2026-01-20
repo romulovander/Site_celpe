@@ -48,12 +48,19 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        
+        /* CORREÇÃO DO FUNDO AQUI */
         .hero-bg { 
-            /* ATUALIZADO: Usando a nova foto de fundo */
-            background-image: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 30, 60, 0.95)), url('assets/foto-fundo.png'); 
+            /* Mudei de 0.85/0.95 para 0.1/0.3 -> O fundo vai ficar transparente agora */
+            background-image: linear-gradient(rgba(0, 51, 102, 0.1), rgba(0, 30, 60, 0.3)), url('assets/foto-fundo.png'); 
             background-size: cover; 
-            background-position: center top; /* Ajustado para focar no rosto da modelo */
+            background-position: center top; /* Foca no rosto da modelo */
+            background-repeat: no-repeat;
         }
+        
+        /* SOMBRA NO TEXTO PARA NÃO SUMIR NO BRANCO DA ROUPA DA ENFERMEIRA */
+        h1, p { text-shadow: 2px 2px 10px rgba(0,0,0,0.9); }
+
         .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .9; } }
         
@@ -69,7 +76,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // DADOS REAIS DA CELPE (ATUALIZADOS)
+        // DADOS REAIS DA CELPE
         const WHATSAPP = "553132124480"; 
         const ENDERECO = "Rua São Paulo, 265 - Sobreloja - Centro, BH";
         const MAPA_LINK = "https://goo.gl/maps/seulinkreal"; // Lembre de atualizar com o link novo do Google Maps
@@ -155,8 +162,8 @@
             <section className="hero-bg text-white py-20 md:py-32 text-center px-4 relative">
                 <div className="container mx-auto max-w-4xl">
                     <div className="flex justify-center gap-2 mb-6">
-                        <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Belo Horizonte</span>
-                        <span onClick={onOpenDelivery} className="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1 transition">
+                        <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">Belo Horizonte</span>
+                        <span onClick={onOpenDelivery} className="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1 transition shadow-lg border border-white/20">
                             <i data-lucide="bike" className="w-3 h-3"></i> Aceitamos Uber Flash
                         </span>
                     </div>
@@ -165,7 +172,7 @@
                         Seu Secador Parou? <br/>
                         <span className="text-orange-400">Nós Consertamos Hoje.</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-gray-100 mb-10 max-w-2xl mx-auto font-medium">
                         Assistência técnica especializada em Taiff, Parlux, Liz e MQ. 
                         Trazendo na loja, o orçamento é na hora. Sem tempo? Mande por Uber.
                     </p>
@@ -173,7 +180,7 @@
                         <a href={`https://wa.me/${WHATSAPP}`} className="bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
                             <i data-lucide="message-circle"></i> Chamar no WhatsApp
                         </a>
-                        <button onClick={onOpenDelivery} className="bg-white/10 hover:bg-white/20 border border-white/30 text-white text-lg font-bold px-8 py-4 rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2">
+                        <button onClick={onOpenDelivery} className="bg-white/10 hover:bg-white/20 border border-white/30 text-white text-lg font-bold px-8 py-4 rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2 shadow-lg">
                            <i data-lucide="package-search"></i> Como enviar?
                         </button>
                     </div>
