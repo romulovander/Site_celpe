@@ -1,326 +1,847 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Clínica do Secador BH | Assistência Técnica Celpe</title>
-    <meta name="description" content="Especialistas em conserto de secadores e equipamentos de salão em BH. Antiga Celpe. Autorizada Taiff, Parlux e Wahl. Buscamos seu aparelho via Uber.">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://celpe.tec.br/">
-    <meta property="og:title" content="Clínica do Secador - Conserto em BH (Delivery Disponível)">
-    <meta property="og:description" content="Seu secador parou? Consertamos em até 30 minutos. Estamos na Rua São Paulo, 265.">
-    <meta property="og:image" content="https://celpe.tec.br/assets/banner-celpe.jpg">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clínica do Secador by Celpe — Assistência Técnica com cuidado de clínica</title>
+  <meta name="description" content="Agende o conserto do seu secador com padrão de clínica: diagnóstico, reparo, teste e garantia. Celpe — Clínica do Secador." />
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Celpe - Clínica do Secador",
-      "image": "https://celpe.tec.br/assets/logo.png",
-      "telephone": "553132124480",
-      "url": "https://celpe.tec.br",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Rua São Paulo, 265 - Sobreloja",
-        "addressLocality": "Centro",
-        "addressRegion": "MG",
-        "postalCode": "30170-130",
-        "addressCountry": "BR"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "priceRange": "$$"
+  <style>
+    :root{
+      /* Paleta “amor + saúde + assinatura Celpe” */
+      --health-900:#0B2B3A;   /* azul/teal profundo (confiança/saúde) */
+      --health-700:#0E4A62;
+      --health-500:#1C8FB3;   /* teal vivo */
+      --love-500:#FF3D6E;     /* toque de amor (rosa) */
+      --celpe-500:#FF7A18;    /* assinatura exclusiva (laranja Celpe) */
+      --bg:#F6FAFC;
+      --card:#FFFFFF;
+      --text:#10212B;
+      --muted:#5A6B76;
+      --line:#E4EEF3;
+      --shadow:0 10px 30px rgba(11,43,58,.12);
+      --radius:18px;
+      --radius-sm:14px;
+      --max:1120px;
     }
-    </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* CORREÇÃO DEFINITIVA DO FUNDO */
-        .hero-bg { 
-            /* Voltamos para 0.1 e 0.3 para ficar bem transparente */
-            background-image: linear-gradient(rgba(0, 30, 60, 0.1), rgba(0, 30, 60, 0.3)), url('assets/foto-fundo.png'); 
-            background-size: cover; 
-            background-position: center right;
-            background-repeat: no-repeat;
-        }
-        
-        /* SOMBRA ESPECÍFICA APENAS PARA O TEXTO DA CAPA (Não borra o resto do site) */
-        .hero-text-shadow { text-shadow: 2px 2px 8px rgba(0,0,0,0.95); }
+    /* Top bar */
+    .topbar{
+      background:linear-gradient(90deg,var(--health-900),var(--health-700));
+      color:#fff;
+      padding:10px 0;
+      font-size:14px;
+    }
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+    .topbar .row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .badge{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--celpe-500);box-shadow:0 0 0 6px rgba(255,122,24,.18)}
+    .top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .mini{opacity:.9}
+    .mini strong{opacity:1}
 
-        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .9; } }
-        
-        /* Animação do Modal */
-        .modal-enter { opacity: 0; transform: scale(0.95); }
-        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 200ms ease-out; }
-    </style>
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(246,250,252,.85);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:14px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--health-500),var(--health-700));
+      box-shadow: 0 8px 22px rgba(28,143,179,.18);
+      overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover}
+    .brand h1{font-size:15px;margin:0;line-height:1.1}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0;align-items:center}
+    nav a{font-size:14px;color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      border:1px solid rgba(255,122,24,.35);
+      background:linear-gradient(135deg,rgba(255,122,24,.14),rgba(255,61,110,.10));
+      color:var(--text);
+      box-shadow:0 10px 22px rgba(255,122,24,.12);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .cta:hover{transform:translateY(-1px)}
+    .cta small{font-weight:600;color:var(--muted)}
+    .hamb{display:none}
+
+    /* Hero */
+    .hero{
+      padding:26px 0 10px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 12px;border-radius:999px;
+      background:#fff;border:1px solid var(--line);
+      box-shadow: 0 10px 22px rgba(11,43,58,.06);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .kicker b{color:var(--health-700)}
+    .hero h2{
+      font-size:42px;line-height:1.05;margin:12px 0 12px;
+      letter-spacing:-.02em;
+    }
+    .hero h2 .love{color:var(--love-500)}
+    .hero h2 .celpe{color:var(--celpe-500)}
+    .hero p{margin:0 0 16px;color:var(--muted);font-size:16px;max-width:58ch}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:14px 16px;border-radius:999px;border:1px solid var(--line);
+      background:#fff;cursor:pointer;font-weight:800;
+    }
+    .btn.primary{
+      border-color: transparent;
+      color:#fff;
+      background:linear-gradient(135deg,var(--health-700),var(--health-500));
+      box-shadow: 0 14px 30px rgba(28,143,179,.22);
+    }
+    .btn.primary:hover{filter:brightness(1.02)}
+    .btn.secondary{
+      background:linear-gradient(135deg,rgba(255,122,24,.12),rgba(255,61,110,.10));
+      border:1px solid rgba(255,122,24,.28);
+    }
+    .pill{
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:14px
+    }
+    .chip{
+      background:#fff;border:1px solid var(--line);
+      padding:10px 12px;border-radius:999px;
+      color:var(--muted);font-size:13px;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .chip i{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--health-500);display:inline-block
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg,#fff,rgba(255,255,255,.86));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card .imgwrap{
+      aspect-ratio: 4/3;
+      background: radial-gradient(circle at 20% 20%, rgba(255,122,24,.16), transparent 40%),
+                  radial-gradient(circle at 80% 20%, rgba(255,61,110,.12), transparent 45%),
+                  radial-gradient(circle at 50% 80%, rgba(28,143,179,.16), transparent 45%);
+      display:grid;place-items:center;
+    }
+    .hero-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position: center 15%;
+    }
+    .hero-card .caption{
+      padding:14px 16px;
+      display:flex;gap:12px;align-items:flex-start;justify-content:space-between
+    }
+    .caption strong{display:block}
+    .caption span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+    .tag{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;
+      background:rgba(28,143,179,.10);
+      border:1px solid rgba(28,143,179,.18);
+      color:var(--health-700);
+      font-weight:800;font-size:12px;
+      white-space:nowrap;
+    }
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-title{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .section-title h3{margin:0;font-size:26px;letter-spacing:-.01em}
+    .section-title p{margin:0;color:var(--muted);max-width:70ch}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow: 0 12px 26px rgba(11,43,58,.06);
+      padding:16px;
+    }
+    .card h4{margin:0 0 6px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .icon{
+      width:44px;height:44px;border-radius:16px;display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(255,122,24,.16),rgba(28,143,179,.14));
+      border:1px solid rgba(255,122,24,.20);
+      margin-bottom:12px;
+    }
+
+    /* Pricing table */
+    .price{
+      display:flex;flex-direction:column;gap:10px
+    }
+    .price .row{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;border-radius:14px;border:1px solid var(--line);
+      background:linear-gradient(180deg,#fff,rgba(255,255,255,.86));
+    }
+    .price .row b{font-size:14px}
+    .money{
+      font-weight:900;
+      color:var(--health-900);
+    }
+    .hint{font-size:12px;color:var(--muted);margin-top:8px}
+
+    /* Stats */
+    .stats{
+      background: linear-gradient(135deg, rgba(28,143,179,.10), rgba(255,61,110,.08), rgba(255,122,24,.10));
+      border:1px solid rgba(28,143,179,.18);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .stat{
+      background:#fff;border:1px solid var(--line);border-radius:16px;
+      padding:14px;
+    }
+    .stat strong{font-size:24px;display:block}
+    .stat span{color:var(--muted);font-size:13px}
+
+    /* Form */
+    form .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,select,textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      outline:none;
+    }
+    input:focus,select:focus,textarea:focus{
+      border-color: rgba(28,143,179,.45);
+      box-shadow: 0 0 0 4px rgba(28,143,179,.10);
+    }
+    textarea{min-height:110px;resize:vertical}
+    .agree{
+      margin-top:12px;
+      display:flex;gap:10px;align-items:flex-start;
+      padding:12px;border-radius:14px;background:#fff;border:1px solid var(--line);
+      color:var(--muted);font-size:13px;
+    }
+    .agree input{width:auto;margin-top:2px}
+    .form-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+    .note{font-size:12px;color:var(--muted)}
+    .success{
+      display:none;
+      margin-top:12px;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid rgba(28,143,179,.25);
+      background: rgba(28,143,179,.08);
+      color: var(--health-700);
+      font-weight:700;
+    }
+
+    /* Steps */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .step{
+      padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line);
+      position:relative;
+    }
+    .step .n{
+      width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+      background:linear-gradient(135deg,rgba(28,143,179,.18),rgba(255,122,24,.16));
+      border:1px solid rgba(28,143,179,.20);
+      font-weight:900;color:var(--health-700);
+      margin-bottom:10px;
+    }
+    .step h4{margin:0 0 6px}
+    .step p{margin:0;color:var(--muted);font-size:13px}
+
+    /* Units */
+    .units{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .unit{
+      background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px
+    }
+    .unit b{display:block}
+    .unit span{color:var(--muted);font-size:13px}
+
+    /* Footer */
+    footer{
+      padding:28px 0;
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+    .foot{
+      display:grid;grid-template-columns: 1.2fr .8fr .8fr .8fr;gap:12px
+    }
+    .foot h5{margin:0 0 10px}
+    .foot a{display:block;color:var(--muted);padding:6px 0;font-size:14px}
+    .foot a:hover{color:var(--text)}
+    .fineprint{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.5}
+
+    /* Floating WhatsApp */
+    .wa{
+      position:fixed;right:18px;bottom:18px;z-index:60;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      background:linear-gradient(135deg,#25D366,#1CCB5F);
+      color:#fff;font-weight:900;
+      box-shadow:0 16px 36px rgba(0,0,0,.18);
+    }
+    .wa:hover{filter:brightness(1.02)}
+    .wa svg{width:18px;height:18px}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero h2{font-size:38px}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .stats-grid{grid-template-columns:1fr}
+      form .fields{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .units{grid-template-columns:1fr 1fr}
+      nav ul{display:none}
+      .hamb{display:inline-flex}
+    }
+    @media (max-width: 520px){
+      .hero h2{font-size:32px}
+      .steps{grid-template-columns:1fr}
+      .units{grid-template-columns:1fr}
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
-    <div id="root"></div>
+<body>
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="badge">
+          <span class="dot"></span>
+          <span><strong>Agende seu conserto</strong> — atendimento com padrão de clínica</span>
+        </div>
+        <div class="top-actions mini">
+          <span><strong>WhatsApp:</strong> (31) 9XXXX-XXXX</span>
+          <span>•</span>
+          <span><strong>Horário:</strong> Seg–Sáb 08h–18h</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#topo" aria-label="Ir para o início">
+          <div class="logo" aria-hidden="true">
+            <!-- Se tiver logo, coloque em assets/logo.png e descomente abaixo -->
+            <!-- <img src="assets/logo.png" alt="Logo Clínica do Secador by Celpe" /> -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2c2.8 0 5 2.2 5 5 0 1.2-.4 2.2-1 3.1l3.7 3.7c.8.8.8 2.1 0 2.9-.8.8-2.1.8-2.9 0L13 16.9c-.9.6-2 .9-3 .9-2.8 0-5-2.2-5-5s2.2-5 5-5Z" stroke="white" stroke-width="1.6"/>
+              <path d="M7.5 12.2h4.8" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Clínica do Secador <span style="color:var(--celpe-500)">by Celpe</span></h1>
+            <p>Assistência técnica com carinho, teste e garantia</p>
+          </div>
+        </a>
 
-        // DADOS REAIS DA CELPE
-        const WHATSAPP = "553132124480"; 
-        const ENDERECO = "Rua São Paulo, 265 - Sobreloja - Centro, BH";
-        const MAPA_LINK = "https://goo.gl/maps/seulinkreal"; // Lembre de atualizar com o link novo do Google Maps
+        <nav aria-label="Navegação principal">
+          <ul>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#tabela">Tabela</a></li>
+            <li><a href="#processo">Como funciona</a></li>
+            <li><a href="#unidades">Unidades</a></li>
+            <li><a href="#contato">Agendar</a></li>
+          </ul>
+        </nav>
 
-        // COMPONENTE: Modal de Delivery
-        const DeliveryModal = ({ isOpen, onClose }) => {
-            if (!isOpen) return null;
+        <a class="cta" href="#contato">
+          <span>Agendar agora</span>
+          <small>em 1 minuto</small>
+        </a>
+      </div>
+    </div>
+  </header>
 
-            return (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose}></div>
-                    <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full relative z-10 p-6 animate-pulse-stop">
-                        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                            <i data-lucide="x" className="w-6 h-6"></i>
-                        </button>
-                        
-                        <div className="text-center mb-6">
-                            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
-                                <i data-lucide="bike" className="w-8 h-8"></i>
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-900">Conserto sem sair de casa</h3>
-                            <p className="text-gray-600 mt-2 text-sm">Aceitamos envio via Uber Flash ou Loggi.</p>
-                        </div>
+  <!-- Hero -->
+  <main id="topo" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">
+            <span style="width:10px;height:10px;border-radius:50%;background:var(--love-500)"></span>
+            <span><b>Amor + Técnica</b> para o seu secador voltar perfeito</span>
+          </div>
 
-                        <div className="space-y-4">
-                            <div className="flex items-start gap-3 bg-gray-50 p-3 rounded-lg">
-                                <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
-                                <p className="text-sm text-gray-700"><strong>Avise no WhatsApp:</strong> Confirme se estamos na loja para receber.</p>
-                            </div>
-                            <div className="flex items-start gap-3 bg-gray-50 p-3 rounded-lg">
-                                <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
-                                <p className="text-sm text-gray-700"><strong>Chame o Uber/Loggi:</strong> Coloque nosso endereço como destino (Rua São Paulo, 265).</p>
-                            </div>
-                            <div className="flex items-start gap-3 bg-gray-50 p-3 rounded-lg">
-                                <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
-                                <p className="text-sm text-gray-700"><strong>Compartilhe:</strong> Mande o link da corrida pra gente acompanhar.</p>
-                            </div>
-                        </div>
+          <h2>
+            Aqui seu secador é tratado como <span class="love">paciente</span> — com diagnóstico, reparo e <span class="celpe">teste</span>.
+          </h2>
 
-                        <div className="mt-8">
-                            <a href={`https://wa.me/${WHATSAPP}?text=Olá, quero enviar meu aparelho por Uber Flash/Moto.`} 
-                               target="_blank"
-                               className="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
-                                <i data-lucide="message-circle"></i> Combinar Entrega no WhatsApp
-                            </a>
-                            <p className="text-xs text-center text-gray-400 mt-3">*Custo do frete por conta do cliente.</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+          <p>
+            Um novo conceito em assistência técnica: atendimento acolhedor, processo transparente e padrão de qualidade
+            para secadores, chapinhas, escovas rotativas e modeladores.
+          </p>
 
-        const FloatingWhatsApp = () => (
-            <a href={`https://wa.me/${WHATSAPP}?text=Olá, meu aparelho estragou e preciso de um orçamento.`} 
-               target="_blank" 
-               className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-40 flex items-center gap-2 transition-transform hover:scale-110">
-                <i data-lucide="message-circle" className="w-8 h-8"></i>
-                <span className="hidden md:inline font-bold">Orçamento Rápido</span>
-            </a>
-        );
+          <div class="hero-actions">
+            <a class="btn primary" href="#contato">Agendar conserto</a>
+            <a class="btn secondary" href="#tabela">Ver tabela de serviços</a>
+            <a class="btn" href="#processo">Como funciona</a>
+          </div>
 
-        const Header = ({ onOpenDelivery }) => (
-            <header className="bg-white py-4 shadow-md sticky top-0 z-40">
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <img src="assets/logo.png" alt="Celpe - Clínica do Secador" className="h-14 md:h-16 w-auto object-contain" />
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <button 
-                            onClick={onOpenDelivery}
-                            className="text-blue-600 font-bold text-sm hover:bg-blue-50 px-3 py-2 rounded-lg transition flex items-center gap-2 border border-blue-200">
-                            <i data-lucide="bike" className="w-4 h-4"></i> Delivery
-                        </button>
-                        <a href={`https://wa.me/${WHATSAPP}`} className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold text-sm transition hidden sm:block">
-                            (31) 3212-4480
-                        </a>
-                    </div>
-                </div>
-            </header>
-        );
+          <div class="pill" aria-label="Destaques rápidos">
+            <span class="chip"><i></i> Diagnóstico claro</span>
+            <span class="chip"><i style="background:var(--celpe-500)"></i> Peças e mão de obra</span>
+            <span class="chip"><i style="background:var(--love-500)"></i> Garantia e teste final</span>
+          </div>
+        </div>
 
-        const Hero = ({ onOpenDelivery }) => (
-            <section className="hero-bg text-white py-20 md:py-32 text-left px-4 relative">
-                <div className="container mx-auto">
-                    <div className="max-w-2xl">
-                        <div className="flex justify-start gap-2 mb-6">
-                            <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">Belo Horizonte</span>
-                            <span onClick={onOpenDelivery} className="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1 transition shadow-lg border border-white/20">
-                                <i data-lucide="bike" className="w-3 h-3"></i> Aceitamos Uber Flash
-                            </span>
-                        </div>
-                        
-                        {/* APLICAÇÃO DA SOMBRA ESPECÍFICA AQUI */}
-                        <h1 className="hero-text-shadow text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                            Seu Secador Parou? <br/>
-                            <span className="text-orange-400">Nós Consertamos Hoje.</span>
-                        </h1>
-                        {/* APLICAÇÃO DA SOMBRA ESPECÍFICA AQUI TAMBÉM */}
-                        <p className="hero-text-shadow text-lg md:text-xl text-gray-100 mb-10 font-medium">
-                            Assistência técnica especializada em Taiff, Parlux, Liz e MQ. 
-                            Trazendo na loja, o orçamento é na hora. Sem tempo? Mande por Uber.
-                        </p>
-                        
-                        <div className="flex flex-col md:flex-row gap-4 justify-start">
-                            <a href={`https://wa.me/${WHATSAPP}`} className="bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                                <i data-lucide="message-circle"></i> Chamar no WhatsApp
-                            </a>
-                            <button onClick={onOpenDelivery} className="bg-white/10 hover:bg-white/20 border border-white/30 text-white text-lg font-bold px-8 py-4 rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2 shadow-lg">
-                            <i data-lucide="package-search"></i> Como enviar?
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
+        <div class="hero-card" aria-label="Foto principal">
+          <div class="imgwrap">
+            <!-- Use a foto enviada como assets/enfermeira.jpg -->
+            <img src="assets/enfermeira.jpg" alt="Enfermeira da Clínica do Secador segurando um secador de cabelo" />
+          </div>
+          <div class="caption">
+            <div>
+              <strong>“Quem ama, cuida.”</strong>
+              <span>Seu aparelho passa por triagem, reparo e checklist final.</span>
+            </div>
+            <div class="tag">Padrão de clínica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-        const Features = () => (
-            <section className="py-12 -mt-10 relative z-20 px-4">
-                <div className="container mx-auto grid md:grid-cols-3 gap-6">
-                    <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-blue-600">
-                        <div className="text-blue-600 mb-4"><i data-lucide="clock" className="w-10 h-10"></i></div>
-                        <h3 className="text-xl font-bold mb-2">Orçamento na Hora</h3>
-                        <p className="text-gray-600">Não cobramos taxa de análise. Você traz o aparelho e já sabe o valor.</p>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-orange-500">
-                        <div className="text-orange-500 mb-4"><i data-lucide="shield-check" className="w-10 h-10"></i></div>
-                        <h3 className="text-xl font-bold mb-2">4 Meses de Garantia</h3>
-                        <p className="text-gray-600">A maior do mercado. Usamos peças originais e damos garantia total.</p>
-                    </div>
-                    <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-green-500">
-                        <div className="text-green-500 mb-4"><i data-lucide="wrench" className="w-10 h-10"></i></div>
-                        <h3 className="text-xl font-bold mb-2">Especialistas Taiff</h3>
-                        <p className="text-gray-600">Somos referência em conserto da linha Taiff e equipamentos profissionais.</p>
-                    </div>
-                </div>
-            </section>
-        );
+  <!-- Serviços / Áreas de atuação -->
+  <section id="servicos">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h3>Nossas áreas de atuação</h3>
+          <p>Inspirado na lógica do PDF (áreas médicas), aqui viram “áreas técnicas” da Clínica do Secador. :contentReference[oaicite:1]{index=1}</p>
+        </div>
+        <a class="btn" href="#contato">Agendar</a>
+      </div>
 
-        const Services = () => (
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-gray-900 mb-4">O que nós consertamos?</h2>
-                        <p className="text-gray-600">Atendemos toda a linha profissional de beleza.</p>
-                    </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {['Secadores Profissionais', 'Chapinhas e Pranchas', 'Máquinas de Corte', 'Escovas Rotativas'].map((item, i) => (
-                            <div key={i} className="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 transition text-center group">
-                                <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
-                                    <i data-lucide="check" className="w-8 h-8"></i>
-                                </div>
-                                <h4 className="font-bold text-lg">{item}</h4>
-                            </div>
-                        ))}
-                    </div>
-                    
-                    <div className="mt-16 text-center">
-                        <p className="text-gray-500 text-sm uppercase tracking-widest font-bold mb-6">Trabalhamos com as melhores marcas</p>
-                        <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                            <span className="text-2xl font-black text-gray-800">TAIFF</span>
-                            <span className="text-2xl font-black text-gray-800">PARLUX</span>
-                            <span className="text-2xl font-black text-gray-800">LIZ</span>
-                            <span className="text-2xl font-black text-gray-800">MQ HAIR</span>
-                            <span className="text-2xl font-black text-gray-800">WAHL</span>
-                            <span className="text-2xl font-black text-gray-800">BABYLISS</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🔧</div>
+          <h4>Secadores</h4>
+          <p>Troca de cabo, resistência, motor, escova de carvão, chave seletora, limpeza técnica e revisão geral.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h4>Chapinhas / Pranchas</h4>
+          <p>Placas, cabo giratório, termostato, aquecimento irregular, mau contato e ajustes.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌀</div>
+          <h4>Escovas rotativas</h4>
+          <p>Motor, engrenagens, aquecimento, ruído, travamento, e manutenção preventiva.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌬️</div>
+          <h4>Modeladores / Babyliss</h4>
+          <p>Aquecimento, cabo, contato interno, acionamento e revisão completa.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧪</div>
+          <h4>Diagnóstico & Checklist</h4>
+          <p>Triagem profissional, orçamento claro e teste final (aquecimento, ventilação e segurança).</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧰</div>
+          <h4>Manutenção preventiva</h4>
+          <p>Limpeza interna, revisão de conexões e prevenção de queima por sobrecarga/poeira.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const Footer = () => (
-            <footer id="endereco" className="bg-blue-900 text-white py-16">
-                <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 className="text-3xl font-bold mb-6">Visite nossa Clínica</h2>
-                        <div className="space-y-4 text-lg">
-                            <div className="flex gap-4 items-start">
-                                <i data-lucide="map-pin" className="mt-1 text-orange-400 shrink-0"></i>
-                                <div>
-                                    <p className="font-bold">Endereço:</p>
-                                    <p>{ENDERECO}</p>
-                                    <p className="text-sm text-blue-200 mt-1">Próximo à Praça Sete</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-4 items-center">
-                                <i data-lucide="phone" className="text-orange-400 shrink-0"></i>
-                                <div>
-                                    <p className="font-bold">Telefone / WhatsApp:</p>
-                                    <p>(31) 3212-4480</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-4 items-center">
-                                <i data-lucide="clock" className="text-orange-400 shrink-0"></i>
-                                <div>
-                                    <p className="font-bold">Horário de Funcionamento:</p>
-                                    <p>Seg a Sex: 09:00 às 18:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-8">
-                            <a href={MAPA_LINK} target="_blank" className="inline-block bg-white text-blue-900 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-                                Abrir no Google Maps
-                            </a>
-                        </div>
-                    </div>
-                    <div className="bg-white/10 p-2 rounded-xl h-64 md:h-80 relative overflow-hidden">
-                        <div className="w-full h-full bg-blue-800 flex items-center justify-center text-blue-300">
-                            Mapa do Google será carregado aqui
-                        </div>
-                    </div>
-                </div>
-                <div className="text-center mt-12 pt-8 border-t border-blue-800 text-sm text-blue-300">
-                    <p>© 2026 Celpe - Clínica do Secador. Todos os direitos reservados.</p>
-                </div>
-            </footer>
-        );
+  <!-- Tabela (equivalente à “tabela nacional”) -->
+  <section id="tabela">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h3>Tabela base de serviços</h3>
+          <p>Modelo semelhante ao “tabela nacional” do PDF, adaptado para serviços técnicos (valores editáveis). :contentReference[oaicite:2]{index=2}</p>
+        </div>
+      </div>
 
-        function App() {
-            const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
+      <div class="grid-2">
+        <div class="card">
+          <h4>Diagnóstico</h4>
+          <div class="price">
+            <div class="row">
+              <span>Triagem + orçamento</span>
+              <span class="money">R$ 30,00</span>
+            </div>
+            <div class="row">
+              <span>Diagnóstico avançado (placa/eletrônica)</span>
+              <span class="money">R$ 60,00</span>
+            </div>
+          </div>
+          <div class="hint">*Se aprovar o conserto, o diagnóstico pode ser abatido (defina sua regra).</div>
+        </div>
 
-            useEffect(() => {
-                lucide.createIcons();
-            }, []);
+        <div class="card">
+          <h4>Reparos comuns</h4>
+          <div class="price">
+            <div class="row">
+              <span>Troca de cabo / plug</span>
+              <span class="money">a partir de R$ 40,00</span>
+            </div>
+            <div class="row">
+              <span>Revisão + limpeza técnica</span>
+              <span class="money">a partir de R$ 60,00</span>
+            </div>
+            <div class="row">
+              <span>Motor / resistência / peças internas</span>
+              <span class="money">sob orçamento</span>
+            </div>
+          </div>
+          <div class="hint">*Valores variam por marca/modelo e necessidade de peças.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            useEffect(() => {
-                lucide.createIcons();
-            }, [isDeliveryOpen]);
+  <!-- Números / Prova social -->
+  <section>
+    <div class="wrap">
+      <div class="stats" role="region" aria-label="Números da Clínica do Secador">
+        <div class="section-title" style="margin:0 0 14px">
+          <div>
+            <h3>Clínica do Secador: conceito pronto para crescer</h3>
+            <p>Assim como o PDF mostra escala (unidades/atendimentos), aqui você mostra autoridade e visão de franquias. :contentReference[oaicite:3]{index=3}</p>
+          </div>
+        </div>
 
-            return (
-                <div className="min-h-screen flex flex-col">
-                    <Header onOpenDelivery={() => setIsDeliveryOpen(true)} />
-                    <Hero onOpenDelivery={() => setIsDeliveryOpen(true)} />
-                    <Features />
-                    <Services />
-                    <Footer />
-                    <FloatingWhatsApp />
-                    <DeliveryModal isOpen={isDeliveryOpen} onClose={() => setIsDeliveryOpen(false)} />
-                </div>
-            );
-        }
+        <div class="stats-grid">
+          <div class="stat">
+            <strong>+500</strong>
+            <span>aparelhos consertados (exemplo)</span>
+          </div>
+          <div class="stat">
+            <strong>12</strong>
+            <span>tipos de reparos padronizados</span>
+          </div>
+          <div class="stat">
+            <strong>Garantia</strong>
+            <span>processo com teste final e checklist</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+  <!-- Tour / Experiência -->
+  <section>
+    <div class="wrap">
+      <div class="grid-2">
+        <div class="card">
+          <h4>Veja a oficina por dentro (Tour 360)</h4>
+          <p>Coloque aqui um link do Google Street View, vídeo do Instagram, ou um tour 360. Fica igual ao bloco do PDF, mas com sua oficina.</p>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" href="#" onclick="alert('Depois você coloca o link do tour 360 aqui 🙂'); return false;">Fazer Tour 360</a>
+            <a class="btn" href="#contato">Agendar</a>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Excelência reconhecida</h4>
+          <p>Crie confiança: padrão de atendimento, organização, transparência e garantia. Se tiver avaliações (Google), coloque o link aqui.</p>
+          <div style="margin-top:12px" class="grid-2">
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">⭐ Avaliações</h4>
+              <p>Google/Instagram (coloque seus números reais)</p>
+            </div>
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">🛡️ Garantia</h4>
+              <p>Termos claros e checklist final</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section id="processo">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h3>Como funciona (padrão de clínica)</h3>
+          <p>É o mesmo “fluxo” do PDF (agendamento → acolhimento → atendimento → pós), só que aplicado ao conserto. :contentReference[oaicite:4]{index=4}</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Agendamento</h4>
+          <p>Você agenda pelo WhatsApp ou formulário e descreve o problema do aparelho.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Triagem</h4>
+          <p>Fazemos diagnóstico e enviamos orçamento claro (com prazos e opções).</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Reparo + Teste</h4>
+          <p>Conserto técnico e checklist final (aquecimento/ventilação/segurança).</p>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Pós-atendimento</h4>
+          <p>Entrega com orientações e garantia. Você avalia e mantém seu aparelho em dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unidades / visão franquias -->
+  <section id="unidades">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h3>Nossas unidades</h3>
+          <p>Hoje: unidade principal. Amanhã: franquias. Deixe o layout pronto para escalar igual o PDF. :contentReference[oaicite:5]{index=5}</p>
+        </div>
+        <a class="btn" href="#contato">Encontrar unidade</a>
+      </div>
+
+      <div class="units">
+        <div class="unit">
+          <b>Belo Horizonte</b>
+          <span>MG • Unidade Matriz</span>
+        </div>
+        <div class="unit">
+          <b>Em breve</b>
+          <span>SP • Pré-cadastro franquia</span>
+        </div>
+        <div class="unit">
+          <b>Em breve</b>
+          <span>RJ • Pré-cadastro franquia</span>
+        </div>
+        <div class="unit">
+          <b>Em breve</b>
+          <span>PR • Pré-cadastro franquia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato / Form -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h3>Receba conteúdos cheios de amor para o seu secador 💙</h3>
+          <p>Formulário no estilo do PDF, com LGPD e captação para contato/retorno. :contentReference[oaicite:6]{index=6}</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Agende seu atendimento</h4>
+          <p>Preencha e a equipe retorna com o melhor horário e o orçamento inicial.</p>
+
+          <form id="leadForm">
+            <div class="fields">
+              <div>
+                <label for="nome">Nome*</label>
+                <input id="nome" name="nome" required placeholder="Seu nome" />
+              </div>
+              <div>
+                <label for="whats">WhatsApp*</label>
+                <input id="whats" name="whats" required placeholder="(DDD) 9XXXX-XXXX" />
+              </div>
+              <div>
+                <label for="cidade">Cidade*</label>
+                <input id="cidade" name="cidade" required placeholder="Sua cidade" />
+              </div>
+              <div>
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado">
+                  <option value="">Selecione</option>
+                  <option>MG</option><option>SP</option><option>RJ</option><option>PR</option>
+                  <option>SC</option><option>RS</option><option>ES</option><option>BA</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <label for="msg">Qual aparelho e qual problema?</label>
+              <textarea id="msg" name="msg" placeholder="Ex: Secador Taiff, liga mas não aquece. Cheiro de queimado."></textarea>
+            </div>
+
+            <div class="agree">
+              <input type="checkbox" id="lgpd" required />
+              <label for="lgpd">
+                Li e concordo com a captação dos dados para contato solicitado (LGPD). Autorizo o compartilhamento com parceiros
+                necessários para o atendimento (ex.: logística/fornecedores), conforme Política de Privacidade.
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Enviar</button>
+              <a class="btn" href="https://wa.me/55SEU_NUMERO_AQUI" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+              <span class="note">Resposta normalmente em até 30 min em horário comercial.</span>
+            </div>
+
+            <div class="success" id="successBox">
+              ✅ Recebido! Já já a equipe te chama no WhatsApp para confirmar o agendamento.
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h4>Atendimento com transparência</h4>
+          <p>O foco é confiança e padrão de qualidade (igual “clínica”).</p>
+
+          <div style="margin-top:14px" class="grid-2">
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">🧾 Orçamento claro</h4>
+              <p>Você aprova antes de qualquer troca de peça.</p>
+            </div>
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">🧰 Peças confiáveis</h4>
+              <p>Reposição compatível e teste de funcionamento.</p>
+            </div>
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">🧪 Checklist final</h4>
+              <p>Aquecimento, ventilação, ruído e segurança.</p>
+            </div>
+            <div class="card" style="box-shadow:none">
+              <h4 style="margin:0 0 6px">🛡️ Garantia</h4>
+              <p>Condições simples e registradas no atendimento.</p>
+            </div>
+          </div>
+
+          <p class="hint">
+            *A Clínica do Secador não vende “milagre”: trabalho técnico, com limites reais e explicação do que compensa reparar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <h5>Clínica do Secador</h5>
+          <div style="color:var(--muted);font-size:14px;line-height:1.6">
+            <div><strong>by Celpe</strong> — assistência técnica com cuidado de clínica.</div>
+            <div>Endereço: Rua X, nº Y — Belo Horizonte/MG</div>
+            <div>Telefone: (31) 3XXX-XXXX</div>
+          </div>
+        </div>
+        <div>
+          <h5>Institucional</h5>
+          <a href="#">Quem somos</a>
+          <a href="#">Trabalhe conosco</a>
+          <a href="#">Ajuda</a>
+        </div>
+        <div>
+          <h5>Serviços</h5>
+          <a href="#servicos">Secadores</a>
+          <a href="#servicos">Chapinhas</a>
+          <a href="#servicos">Escovas rotativas</a>
+          <a href="#tabela">Tabela</a>
+        </div>
+        <div>
+          <h5>Políticas</h5>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Garantia</a>
+          <a href="#">LGPD</a>
+        </div>
+      </div>
+
+      <div class="fineprint">
+        <strong>Nota:</strong> Este site é um modelo pronto para escalar (multi-unidades/franquias).  
+        Ajuste textos, números, tabela e políticas conforme sua operação real.
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating -->
+  <a class="wa" href="https://wa.me/55SEU_NUMERO_AQUI" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 11.6c0 4.6-3.8 8.4-8.4 8.4-1.4 0-2.8-.4-4-.9L4 20l.9-3.4c-.6-1.2-.9-2.6-.9-4C4 7 7.8 3.2 12.4 3.2 16.2 3.2 20 7 20 11.6Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M9.2 8.7c.2-.4.4-.4.6-.4h.5c.1 0 .3 0 .4.3l.7 1.8c.1.3.1.5-.1.7l-.5.6c-.1.1-.1.3 0 .4.5.9 1.3 1.7 2.2 2.2.1.1.3.1.4 0l.6-.5c.2-.2.4-.2.7-.1l1.8.7c.3.1.3.3.3.4v.5c0 .2 0 .4-.4.6-.4.3-1.2.6-2 .4-1.9-.4-4.9-3.4-5.3-5.3-.2-.8.1-1.6.4-2Z" fill="white"/>
+    </svg>
+    WhatsApp
+  </a>
+
+  <script>
+    // Simples “envio” do formulário (front-only).
+    // Depois você pode integrar com WhatsApp API, Email, Zapier, Make, etc.
+    const form = document.getElementById('leadForm');
+    const successBox = document.getElementById('successBox');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // validação básica
+      const nome = document.getElementById('nome').value.trim();
+      const whats = document.getElementById('whats').value.trim();
+      const cidade = document.getElementById('cidade').value.trim();
+      const lgpd = document.getElementById('lgpd').checked;
+
+      if(!nome || !whats || !cidade || !lgpd){
+        alert("Preencha Nome, WhatsApp, Cidade e aceite a LGPD.");
+        return;
+      }
+
+      // Aqui você pode enviar para um endpoint (ex: /api/lead) no futuro
+      successBox.style.display = "block";
+      form.reset();
+
+      // Scroll suave para mostrar confirmação
+      successBox.scrollIntoView({behavior:"smooth", block:"center"});
+    });
+  </script>
 </body>
 </html>
