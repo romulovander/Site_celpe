@@ -1,404 +1,442 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <title>Clínica do Secador by Celpe — Saúde para seu Equipamento</title>
-  <meta name="description" content="Assistência técnica especializada em secadores e equipamentos de beleza. Padrão de clínica em Belo Horizonte. Aceitamos Uber Flash." />
-  <meta property="og:title" content="Clínica do Secador by Celpe">
-  <meta property="og:description" content="Seu secador parou? Agende um diagnóstico com padrão de clínica.">
-  <meta property="og:image" content="https://celpe.tec.br/assets/banner-celpe.jpg">
-
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    :root{
-      /* Identidade Visual Clínica Celpe */
-      --health-900:#0B2B3A;   /* Azul Profundo */
-      --health-700:#0E4A62;
-      --health-500:#1C8FB3;   /* Azul Hospitalar/Clean */
-      --love-500:#FF3D6E;     /* Rosa (Cuidado/Amor) */
-      --celpe-500:#FF7A18;    /* Laranja (Energia/Celpe) */
-      --bg:#F6FAFC;
-      --card:#FFFFFF;
-      --text:#10212B;
-      --muted:#5A6B76;
-      --line:#E4EEF3;
-      --shadow:0 10px 30px rgba(11,43,58,.08);
-      --radius:18px;
-      --max:1120px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior: smooth;}
-    body{margin:0;padding:0;font-family:system-ui,-apple-system,Inter,sans-serif;color:var(--text);background:var(--bg)}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    button,input,select,textarea{font:inherit}
-
-    /* --- LAYOUT GERAL --- */
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celpe - Clínica do Secador | Quem ama, cuida do equipamento.</title>
     
-    /* Topbar */
-    .topbar{background:linear-gradient(90deg,var(--health-900),var(--health-700));color:#fff;padding:10px 0;font-size:13px;}
-    .topbar .row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.15);}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--celpe-500);box-shadow:0 0 0 4px rgba(255,122,24,.2)}
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    /* Header */
-    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0;}
-    .nav{display:flex;align-items:center;justify-content:space-between;}
-    .brand{display:flex;align-items:center;gap:12px}
-    /* Logo: Ajuste para caber sua imagem */
-    .logo-img { height: 45px; width: auto; object-fit: contain; } 
-    
-    /* Menu Desktop */
-    .desktop-menu ul{list-style:none;display:flex;gap:24px;margin:0;padding:0;align-items:center}
-    .desktop-menu a{font-size:14px;font-weight:500;color:var(--muted);transition:0.2s}
-    .desktop-menu a:hover{color:var(--health-500)}
-    
-    /* Botão CTA */
-    .cta{
-      display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:99px;
-      background:linear-gradient(135deg,var(--celpe-500),#FF9F56);color:#fff;
-      font-weight:700;box-shadow:0 8px 20px rgba(255,122,24,.25);transition:0.2s;border:none;cursor:pointer;
-    }
-    .cta:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(255,122,24,.35);}
+    <style>
+        /* --- ESTILO CLONE AMORSAÚDE (ADAPTADO CELPE) --- */
+        :root {
+            --celpe-blue: #0B2B3A; /* Azul Escuro Celpe */
+            --celpe-orange: #FF7A18; /* Laranja Celpe */
+            --bg-gray: #f9f9f9;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #fff;
+        }
 
-    /* Menu Mobile Botão */
-    .hamb-btn { display: none; background: none; border: none; cursor: pointer; color: var(--health-900); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
+        body { background-color: var(--white); color: var(--text-dark); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+        .transition { transition: all 0.3s ease; }
+        .img-responsive { max-width: 100%; height: auto; display: block; }
 
-    /* Menu Mobile Gaveta */
-    .mobile-menu {
-      position: fixed; top: 0; right: 0; height: 100vh; width: 280px;
-      background: white; z-index: 100; transform: translateX(100%); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1); padding: 30px; display: flex; flex-direction: column; gap: 20px;
-    }
-    .mobile-menu.active { transform: translateX(0); }
-    .mobile-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; 
-      opacity: 0; pointer-events: none; transition: 0.3s;
-    }
-    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
-    .close-btn { align-self: flex-end; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); }
+        /* 1. TOPBAR (Igual AmorSaúde: vermelhinho em cima, aqui Laranja) */
+        .bartop {
+            height: 10px;
+            background: linear-gradient(90deg, var(--celpe-blue) 0%, var(--celpe-orange) 100%);
+            width: 100%;
+        }
 
-    /* Hero */
-    .hero{padding:40px 0 60px;}
-    .hero-grid{display:grid;grid-template-columns: 1.1fr 0.9fr;gap:40px;align-items:center;}
-    .hero h1{font-size:42px;line-height:1.1;margin:16px 0;letter-spacing:-1px;color:var(--health-900);}
-    .hero p{font-size:18px;color:var(--muted);line-height:1.6;margin-bottom:24px;max-width:500px;}
-    
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:700;transition:0.2s;cursor:pointer;}
-    .btn-primary{background:var(--health-900);color:white;border:none;}
-    .btn-primary:hover{background:var(--health-700);}
-    .btn-outline{background:white;border:1px solid var(--line);color:var(--health-700);}
-    .btn-outline:hover{background:#F8FBFC;border-color:var(--health-500);}
+        /* 2. MENU (Logo Esquerda, Links Centro, Botão Direita) */
+        #menu {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .group_menu_desktop {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 0;
+        }
+        .logo_top { height: 50px; } /* Ajuste sua logo aqui */
+        
+        .desktop_menu { display: flex; gap: 25px; align-items: center; }
+        .desktop_menu li {
+            font-weight: 600; color: var(--text-light); font-size: 14px; cursor: pointer;
+        }
+        .desktop_menu li:hover { color: var(--celpe-orange); }
 
-    /* Card da Foto (Enfermeira) */
-    .hero-card{
-      position: relative; border-radius: var(--radius); overflow: hidden;
-      box-shadow: var(--shadow); border: 4px solid #fff;
-      aspect-ratio: 4/5; /* Formato retrato para a enfermeira */
-    }
-    .hero-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .hero-tag {
-      position: absolute; bottom: 20px; left: 20px; right: 20px;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(5px);
-      padding: 15px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
+        /* Botão "Marque sua consulta" do AmorSaúde vira "Delivery/Agendar" */
+        .bt_marque_consulta {
+            background-color: var(--celpe-orange);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 15px rgba(255, 122, 24, 0.3);
+        }
+        .bt_marque_consulta:hover { transform: translateY(-2px); background-color: #e66a12; }
 
-    /* Cards e Grid */
-    section{padding:50px 0;}
-    .section-title h2{font-size:32px;color:var(--health-900);margin:0 0 10px;}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .card{background:white;padding:24px;border-radius:var(--radius);border:1px solid var(--line);transition:0.2s;}
-    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--health-500);}
-    .icon-box{width:48px;height:48px;border-radius:12px;background:rgba(28,143,179,.1);color:var(--health-500);display:grid;place-items:center;margin-bottom:16px;}
+        /* 3. HERO (Banner Principal) */
+        #home_banner {
+            position: relative;
+            background-color: #F4F7F9; /* Fundo cinza bem clarinho igual site médico */
+            overflow: hidden;
+        }
+        .banner_content {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 60px 0;
+        }
+        .banner_text { max-width: 50%; z-index: 10; }
+        .banner_text h1 {
+            font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: var(--celpe-blue);
+        }
+        .banner_text span { color: var(--celpe-orange); }
+        .banner_text p { font-size: 18px; color: var(--text-light); margin-bottom: 30px; }
+        
+        .banner_img { 
+            max-width: 45%; 
+            position: relative;
+        }
+        /* Efeito de círculo atrás da enfermeira igual AmorSaúde usa mascotes */
+        .banner_img::before {
+            content: ''; position: absolute; top: 10%; right: -20%; width: 400px; height: 400px;
+            background-color: rgba(255, 122, 24, 0.1); border-radius: 50%; z-index: -1;
+        }
 
-    /* Tabela de Preços */
-    .price-row{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--line);}
-    .price-val{font-weight:800;color:var(--health-700);font-size:18px;}
+        /* 4. STEPS (Agendamento, Acolhimento...) */
+        #home_steps { padding: 50px 0; background: var(--white); }
+        .group_steps {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center;
+        }
+        .step_item { padding: 20px; }
+        .step_icon {
+            width: 70px; height: 70px; margin: 0 auto 20px;
+            background: #f0f4f7; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--celpe-blue);
+        }
+        .step_title { font-size: 18px; font-weight: 700; color: var(--celpe-blue); margin-bottom: 10px; }
+        .step_desc { font-size: 13px; color: var(--text-light); line-height: 1.5; }
 
-    /* Formulário */
-    .form-box{background:white;padding:30px;border-radius:var(--radius);box-shadow:var(--shadow);}
-    input, select, textarea{width:100%;padding:12px;margin-bottom:12px;border:1px solid var(--line);border-radius:8px;outline:none;}
-    input:focus{border-color:var(--health-500);box-shadow:0 0 0 3px rgba(28,143,179,.1);}
+        /* 5. TABELA DE PREÇOS (O Grande Diferencial) */
+        .novo-presite-precos { background-color: #f9f9f9; padding: 60px 0; }
+        .pricing_row { display: flex; gap: 20px; align-items: flex-start; }
+        
+        /* Box Título Esquerda */
+        .pricing_title_box { flex: 1; display: flex; align-items: center; gap: 15px; }
+        .pricing_title_box h3 { font-size: 24px; font-weight: 700; color: var(--celpe-blue); }
+        
+        /* Cards de Preço */
+        .pricing_cards { flex: 2; display: flex; gap: 20px; }
+        
+        /* Card Parceiro (Cartão de Todos) */
+        .card_price.partner {
+            flex: 1; background: var(--white); border-radius: 10px; overflow: hidden;
+            border: 2px solid var(--celpe-blue); box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .card_header { padding: 15px; text-align: center; font-weight: 700; color: var(--white); }
+        .partner .card_header { background: var(--celpe-blue); }
+        .particular .card_header { background: #e0e0e0; color: var(--text-dark); }
+        
+        .card_body { padding: 20px; }
+        .price_item { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .price_name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+        .price_val { font-size: 18px; font-weight: 800; color: var(--celpe-orange); }
 
-    /* Footer */
-    footer{background:white;padding:40px 0;border-top:1px solid var(--line);margin-top:40px;}
-    
-    /* MODAL DE DELIVERY */
-    .modal {
-        display: none; position: fixed; inset: 0; z-index: 200;
-        align-items: center; justify-content: center; padding: 20px;
-    }
-    .modal.open { display: flex; }
-    .modal-backdrop { position: absolute; inset: 0; background: rgba(11, 43, 58, 0.6); backdrop-filter: blur(4px); }
-    .modal-content {
-        background: white; width: 100%; max-width: 450px; border-radius: 20px;
-        position: relative; z-index: 210; padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        animation: modalUp 0.3s ease-out;
-    }
-    @keyframes modalUp { from {transform: translateY(20px); opacity:0;} to {transform: translateY(0); opacity:1;} }
-    .step-item { display: flex; gap: 15px; margin-bottom: 15px; background: #F8FAFC; padding: 12px; border-radius: 12px; }
-    .step-num { 
-        background: var(--health-500); color: white; width: 24px; height: 24px; 
-        border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0; margin-top: 2px;
-    }
+        /* Card Particular */
+        .card_price.particular { flex: 1; background: var(--white); border-radius: 10px; border: 1px solid #ddd; }
 
-    /* Responsivo */
-    @media (max-width: 900px){
-        .desktop-menu { display: none; }
-        .hamb-btn { display: block; }
-        .hero-grid { grid-template-columns: 1fr; text-align: center; }
-        .hero p { margin: 0 auto 24px; }
-        .hero-actions { justify-content: center; }
-        .hero-card { max-width: 400px; margin: 0 auto; aspect-ratio: 1/1; }
-        .grid-3 { grid-template-columns: 1fr; }
-    }
-  </style>
+        /* 6. GRID ESPECIALIDADES */
+        #areas_atuacao { padding: 60px 0; text-align: center; }
+        .section_title { font-size: 28px; font-weight: 800; color: var(--celpe-blue); margin-bottom: 40px; }
+        .grid_areas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        
+        .area_item {
+            background: var(--white); border: 1px solid #eee; border-radius: 10px; padding: 20px;
+            transition: 0.3s; cursor: pointer;
+        }
+        .area_item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--celpe-orange); }
+        .area_icon { margin-bottom: 15px; color: var(--celpe-orange); }
+        .area_name { font-weight: 700; font-size: 15px; color: var(--text-dark); }
+
+        /* 7. FORMULÁRIO (Igual AmorSaúde: Form esquerda, Imagem direita) */
+        #form_section { padding: 60px 0; background: #fff; }
+        .form_container {
+            display: flex; background: var(--white); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #eee;
+        }
+        .form_box { flex: 1; padding: 40px; }
+        .form_img_box { flex: 1; position: relative; }
+        .form_img_box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .form_title { font-size: 22px; font-weight: 800; color: var(--celpe-blue); margin-bottom: 20px; }
+        .input_group { margin-bottom: 15px; }
+        .input_field { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .bt_enviar {
+            width: 100%; padding: 15px; background: var(--celpe-orange); color: white; border: none;
+            border-radius: 5px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .bt_enviar:hover { background: #e66a12; }
+
+        /* 8. FOOTER */
+        footer { background: var(--celpe-blue); color: white; padding: 50px 0; margin-top: 50px; }
+        .footer_grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 30px; }
+        .footer_logo { height: 40px; filter: brightness(0) invert(1); margin-bottom: 20px; }
+        .footer_txt { font-size: 13px; line-height: 1.6; opacity: 0.8; }
+        .footer_tit { font-weight: 700; margin-bottom: 15px; font-size: 16px; }
+        .footer_link { display: block; color: rgba(255,255,255,0.7); margin-bottom: 8px; font-size: 14px; }
+        .footer_link:hover { color: white; }
+
+        /* MODAL UBER (Popup elegante) */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .modal_content { background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; position: relative; text-align: center; }
+        .close_modal { position: absolute; top: 15px; right: 15px; cursor: pointer; font-weight: bold; }
+
+        /* Responsivo Mobile */
+        @media(max-width: 768px) {
+            .group_menu_desktop { flex-direction: column; gap: 15px; }
+            .desktop_menu { display: none; } /* Simplificado para mobile */
+            .banner_content { flex-direction: column-reverse; text-align: center; }
+            .banner_text, .banner_img { max-width: 100%; }
+            .group_steps { grid-template-columns: 1fr; }
+            .pricing_row { flex-direction: column; }
+            .pricing_cards { flex-direction: column; width: 100%; }
+            .grid_areas { grid-template-columns: repeat(2, 1fr); }
+            .form_container { flex-direction: column; }
+            .footer_grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
+<body>
 
-<body id="topo">
+    <div class="bartop"></div>
 
-  <div class="topbar">
-    <div class="wrap">
-      <div class="row">
-        <div class="badge">
-          <span class="dot"></span>
-          <span><strong>Clínica do Secador</strong> — Cuidado profissional para seu equipamento</span>
+    <section id="menu">
+        <div class="container">
+            <div class="group_menu_desktop">
+                <a href="#">
+                    <img src="assets/logo.png" alt="Celpe" class="logo_top">
+                </a>
+
+                <ul class="desktop_menu">
+                    <li>A Clínica</li>
+                    <li>Especialidades</li>
+                    <li>Unidades</li>
+                    <li>Tele-Diagnóstico</li>
+                    <li>Ajuda</li>
+                </ul>
+
+                <div class="action_marque_consulta">
+                    <a href="#" onclick="openModal()" class="bt_marque_consulta transition">
+                        <i data-lucide="bike" width="18"></i> Delivery / Agendar
+                    </a>
+                </div>
+            </div>
         </div>
-        <div style="opacity: 0.9">
-          📍 Rua São Paulo, 265 - Centro, BH
+    </section>
+
+    <section id="home_banner">
+        <div class="container banner_content">
+            <div class="banner_text">
+                <h1>Quem ama, cuida <br><span>do seu equipamento.</span></h1>
+                <p>Assistência técnica com padrão de clínica. Medicina para seu secador, odontologia para sua máquina de corte. <b>Atendimento humanizado para máquinas profissionais.</b></p>
+                
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="#form_section" style="background: var(--celpe-blue); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700;">
+                        Agendar Triagem
+                    </a>
+                    <a href="https://wa.me/553132124480" style="border: 2px solid var(--celpe-blue); color: var(--celpe-blue); padding: 12px 30px; border-radius: 50px; font-weight: 700;">
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="banner_img">
+                <img src="assets/foto-fundo.png" alt="Especialista Celpe" class="img-responsive">
+            </div>
         </div>
-      </div>
+    </section>
+
+    <section id="home_steps">
+        <div class="container">
+            <div class="group_steps">
+                <div class="step_item">
+                    <div class="step_icon"><i data-lucide="calendar-check" width="30"></i></div>
+                    <h5 class="step_title">1. Agendamento</h5>
+                    <p class="step_desc">Agende uma triagem técnica pelo telefone, site ou envie por Uber Flash.</p>
+                </div>
+                <div class="step_item">
+                    <div class="step_icon"><i data-lucide="clipboard-list" width="30"></i></div>
+                    <h5 class="step_title">2. Acolhimento</h5>
+                    <p class="step_desc">Seu aparelho passa por um diagnóstico técnico (anamnese) gratuito na hora.</p>
+                </div>
+                <div class="step_item">
+                    <div class="step_icon"><i data-lucide="wrench" width="30"></i></div>
+                    <h5 class="step_title">3. Atendimento</h5>
+                    <p class="step_desc">Cirurgia realizada com peças originais e ferramentas de precisão.</p>
+                </div>
+                <div class="step_item">
+                    <div class="step_icon"><i data-lucide="thumbs-up" width="30"></i></div>
+                    <h5 class="step_title">4. Pós-Alta</h5>
+                    <p class="step_desc">Testes finais e liberação com certificado de garantia de 4 meses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="novo-presite-precos">
+        <div class="container">
+            <div class="pricing_row">
+                <div class="pricing_title_box">
+                    <img src="assets/logo.png" style="height: 40px;">
+                    <h3>Tabela Referencial de Procedimentos:</h3>
+                </div>
+                
+                <div class="pricing_cards">
+                    <div class="card_price partner">
+                        <div class="card_header">PARCEIRO SALÃO</div>
+                        <div class="card_body">
+                            <div class="price_item">
+                                <span class="price_name">ORÇAMENTO</span>
+                                <span class="price_val">Gratuito</span>
+                            </div>
+                            <div class="price_item">
+                                <span class="price_name">TROCA CABO</span>
+                                <span class="price_val">R$ 50,00</span>
+                            </div>
+                            <div class="price_item">
+                                <span class="price_name">LIMPEZA</span>
+                                <span class="price_val">R$ 35,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card_price particular">
+                        <div class="card_header">CLIENTE AVULSO</div>
+                        <div class="card_body">
+                            <div class="price_item">
+                                <span class="price_name">ORÇAMENTO</span>
+                                <span class="price_val">Gratuito</span>
+                            </div>
+                            <div class="price_item">
+                                <span class="price_name">TROCA CABO</span>
+                                <span class="price_val">R$ 65,00</span>
+                            </div>
+                            <div class="price_item">
+                                <span class="price_name">LIMPEZA</span>
+                                <span class="price_val">R$ 50,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <header>
-    <div class="wrap">
-      <div class="nav">
-        <a class="brand" href="#topo">
-          <img src="assets/logo.png" alt="Celpe Logo" class="logo-img" />
-        </a>
+    <section id="areas_atuacao">
+        <div class="container">
+            <h2 class="section_title">Nossas especialidades</h2>
+            <div class="grid_areas">
+                <div class="area_item">
+                    <div class="area_icon"><i data-lucide="wind" width="40"></i></div>
+                    <p class="area_name">Secadores</p>
+                </div>
+                <div class="area_item">
+                    <div class="area_icon"><i data-lucide="zap" width="40"></i></div>
+                    <p class="area_name">Chapinhas</p>
+                </div>
+                <div class="area_item">
+                    <div class="area_icon"><i data-lucide="scissors" width="40"></i></div>
+                    <p class="area_name">Máquinas</p>
+                </div>
+                <div class="area_item">
+                    <div class="area_icon"><i data-lucide="rotate-cw" width="40"></i></div>
+                    <p class="area_name">Escovas</p>
+                </div>
+                <div class="area_item">
+                    <div class="area_icon"><i data-lucide="shield-check" width="40"></i></div>
+                    <p class="area_name">Preventiva</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <nav class="desktop-menu">
-          <ul>
-            <li><a href="#servicos">Especialidades</a></li>
-            <li><a href="#tabela">Tabela</a></li>
-            <li><a href="#processo">Como funciona</a></li>
-            <li>
-                <button onclick="openModal()" class="btn-outline" style="padding: 8px 16px; border-radius: 99px; display:flex; align-items:center; gap:6px; font-size:13px;">
-                    <i data-lucide="bike" width="16"></i> Enviar por Uber
-                </button>
-            </li>
-          </ul>
-        </nav>
+    <section id="form_section">
+        <div class="container">
+            <div class="form_container">
+                <div class="form_box">
+                    <h5 class="form_title">Receba um diagnóstico cheio de cuidado!</h5>
+                    <form id="leadForm">
+                        <div class="input_group">
+                            <input type="text" id="nome" class="input_field" placeholder="Seu Nome" required>
+                        </div>
+                        <div class="input_group">
+                            <input type="text" id="aparelho" class="input_field" placeholder="Qual aparelho? (Ex: Secador Taiff)" required>
+                        </div>
+                        <div class="input_group">
+                            <input type="text" id="cidade" class="input_field" placeholder="Cidade" required>
+                        </div>
+                        <button type="submit" class="bt_enviar">AGENDAR TRIAGEM</button>
+                    </form>
+                </div>
+                <div class="form_img_box">
+                    <img src="assets/foto-fundo.png" alt="Atendimento">
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-            <a href="#contato" class="cta">
-              <i data-lucide="calendar-check" width="18"></i> Agendar
+    <footer>
+        <div class="container">
+            <div class="footer_grid">
+                <div>
+                    <img src="assets/logo.png" alt="Celpe" class="footer_logo">
+                    <p class="footer_txt">Fornecendo aos cabeleireiros acesso à manutenção de qualidade a baixo custo. <i data-lucide="heart" width="12" fill="red"></i></p>
+                </div>
+                <div>
+                    <div class="footer_tit">Siga nossas redes</div>
+                    <a href="#" class="footer_link">Instagram</a>
+                    <a href="#" class="footer_link">Facebook</a>
+                </div>
+                <div>
+                    <div class="footer_tit">Unidade Matriz</div>
+                    <p class="footer_txt">Rua São Paulo, 265<br>Sobreloja - Centro BH<br>(31) 3212-4480</p>
+                </div>
+                <div>
+                    <div class="footer_tit">Serviços</div>
+                    <a href="#" class="footer_link">Secadores</a>
+                    <a href="#" class="footer_link">Afiação</a>
+                    <a href="#" class="footer_link">Delivery</a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px; padding-top: 20px; font-size: 12px; opacity: 0.6; text-align: center;">
+                CNPJ: XX.XXX.XXX/0001-XX • Celpe Assistência Técnica • Política de Privacidade
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="deliveryModal">
+        <div class="modal_content">
+            <span class="close_modal" onclick="closeModal()">X</span>
+            <div style="width: 50px; height: 50px; background: #e0f2fe; border-radius: 50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 15px; color: var(--celpe-blue);">
+                <i data-lucide="bike" width="24"></i>
+            </div>
+            <h3 style="color: var(--celpe-blue); margin-bottom: 10px;">Envio por Uber/Loggi</h3>
+            <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                1. Avise no WhatsApp.<br>
+                2. Chame o Uber para: <b>Rua São Paulo, 265 - Sobreloja</b>.<br>
+                3. Envie o link da corrida.
+            </p>
+            <a href="https://wa.me/553132124480?text=Quero%20enviar%20por%20Uber" target="_blank" style="display:block; background: #25D366; color: white; padding: 10px; border-radius: 5px; font-weight: bold;">
+                Combinar no WhatsApp
             </a>
-            <button class="hamb-btn" onclick="toggleMenu()" aria-label="Menu">
-              <i data-lucide="menu" width="28"></i>
-            </button>
         </div>
-      </div>
     </div>
-  </header>
 
-  <div class="mobile-overlay" onclick="toggleMenu()"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="close-btn" onclick="toggleMenu()"><i data-lucide="x"></i></button>
-    <a href="#servicos" onclick="toggleMenu()">Especialidades</a>
-    <a href="#tabela" onclick="toggleMenu()">Tabela de Preços</a>
-    <a href="#processo" onclick="toggleMenu()">Como funciona</a>
-    <hr style="border:0; border-top:1px solid #eee; width:100%;">
-    <button onclick="openModal(); toggleMenu();" style="text-align:left; color:var(--health-500); font-weight:700; background:none; border:none; display:flex; gap:10px;">
-        <i data-lucide="bike"></i> Enviar por Uber
-    </button>
-  </div>
+    <script>
+        lucide.createIcons();
 
-  <main class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(28,143,179,.1); color:var(--health-700); padding:6px 12px; border-radius:99px; font-size:13px; font-weight:600; margin-bottom:16px;">
-            <i data-lucide="heart-pulse" width="16"></i> Quem ama, cuida
-          </div>
+        function openModal() { document.getElementById('deliveryModal').classList.add('active'); }
+        function closeModal() { document.getElementById('deliveryModal').classList.remove('active'); }
 
-          <h1>
-            Seu secador é tratado como <span style="color:var(--love-500)">paciente</span>.
-          </h1>
-
-          <p>
-            Assistência técnica com padrão de clínica. Diagnóstico preciso, peças originais e checklist de segurança para seu instrumento de trabalho.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#contato" class="btn btn-primary">
-                <i data-lucide="message-circle"></i> Agendar Triagem
-            </a>
-            <button onclick="openModal()" class="btn btn-outline">
-                <i data-lucide="package-search"></i> Como enviar?
-            </button>
-          </div>
-          
-          <div style="margin-top:24px; display:flex; gap:16px; font-size:13px; color:var(--muted);">
-            <span style="display:flex; gap:6px;"><i data-lucide="check-circle" width="16" color="var(--health-500)"></i> Garantia de 4 meses</span>
-            <span style="display:flex; gap:6px;"><i data-lucide="check-circle" width="16" color="var(--health-500)"></i> Peças Originais</span>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <img src="assets/foto-fundo.png" alt="Especialista Celpe" />
-          
-          <div class="hero-tag">
-            <strong style="color:var(--health-900); display:block;">Padrão Clínico</strong>
-            <span style="font-size:13px; color:var(--muted);">Triagem • Reparo • Teste</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <section id="servicos">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Especialidades da Clínica</h2>
-        <p style="color:var(--muted)">Atuamos como um hospital para seus aparelhos.</p>
-      </div>
-
-      <div class="grid-3" style="margin-top:30px;">
-        <div class="card">
-          <div class="icon-box"><i data-lucide="wind"></i></div>
-          <h4>Secadores</h4>
-          <p style="color:var(--muted); font-size:14px;">Troca de motor, cabo, resistência e limpeza técnica preventiva.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box"><i data-lucide="zap"></i></div>
-          <h4>Chapinhas</h4>
-          <p style="color:var(--muted); font-size:14px;">Reparo de placas, aquecimento irregular e termostatos.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box"><i data-lucide="activity"></i></div>
-          <h4>Diagnóstico</h4>
-          <p style="color:var(--muted); font-size:14px;">Check-up completo para identificar falhas antes que o aparelho pare.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contato" style="background:var(--line);">
-    <div class="wrap">
-      <div class="grid-3" style="grid-template-columns: 1fr 1.5fr;">
-        <div>
-            <h2>Agende sua consulta</h2>
-            <p style="color:var(--muted); margin-bottom:20px;">Preencha a ficha e nossa equipe já recebe seu caso no WhatsApp.</p>
-            
-            <div style="background:white; padding:20px; border-radius:12px;">
-                <h4 style="margin:0 0 10px 0;">Matriz Belo Horizonte</h4>
-                <p style="font-size:14px; color:var(--muted); margin:0;">Rua São Paulo, 265 - Sobreloja<br>Centro - BH</p>
-            </div>
-        </div>
-
-        <div class="form-box">
-            <form id="leadForm">
-                <label style="font-size:13px; font-weight:bold; color:var(--muted);">NOME DO PROFISSIONAL</label>
-                <input type="text" id="nome" placeholder="Seu nome" required>
-
-                <label style="font-size:13px; font-weight:bold; color:var(--muted);">APARELHO / SINTOMAS</label>
-                <textarea id="msg" rows="3" placeholder="Ex: Secador Taiff parou de aquecer..." required></textarea>
-
-                <label style="font-size:13px; font-weight:bold; color:var(--muted);">CIDADE</label>
-                <input type="text" id="cidade" placeholder="Ex: Belo Horizonte" required>
-
-                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
-                    Enviar para Triagem <i data-lucide="send"></i>
-                </button>
-            </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap" style="text-align:center;">
-        <img src="assets/logo.png" alt="Celpe" style="height:35px; margin:0 auto 20px auto; opacity:0.8;">
-        <p style="font-size:13px; color:var(--muted);">© 2026 Celpe Assistência Técnica. Todos os direitos reservados.</p>
-    </div>
-  </footer>
-
-  <div class="modal" id="deliveryModal">
-    <div class="modal-backdrop" onclick="closeModal()"></div>
-    <div class="modal-content">
-        <button onclick="closeModal()" style="position:absolute; top:15px; right:15px; background:none; border:none; cursor:pointer;"><i data-lucide="x"></i></button>
-        
-        <div style="text-align:center; margin-bottom:20px;">
-            <div style="width:60px; height:60px; background:#E0F2FE; color:var(--health-500); border-radius:50%; display:grid; place-items:center; margin:0 auto 10px auto;">
-                <i data-lucide="bike" width="30"></i>
-            </div>
-            <h3 style="margin:0; color:var(--health-900);">Envio por Uber/Loggi</h3>
-            <p style="font-size:14px; color:var(--muted);">Consertamos sem você sair do salão.</p>
-        </div>
-
-        <div class="step-item">
-            <span class="step-num">1</span>
-            <div style="font-size:14px;">
-                <strong>Avise no WhatsApp:</strong><br>
-                Confirme se estamos na loja para receber.
-            </div>
-        </div>
-        <div class="step-item">
-            <span class="step-num">2</span>
-            <div style="font-size:14px;">
-                <strong>Chame o Uber Flash:</strong><br>
-                Destino: <b>Rua São Paulo, 265 - Sobreloja</b>
-            </div>
-        </div>
-        <div class="step-item">
-            <span class="step-num">3</span>
-            <div style="font-size:14px;">
-                <strong>Compartilhe:</strong><br>
-                Mande o link da corrida pra gente acompanhar.
-            </div>
-        </div>
-
-        <a href="https://wa.me/553132124480?text=Ol%C3%A1%2C%20quero%20enviar%20por%20Uber%20Flash." target="_blank" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:10px;">
-            Combinar no WhatsApp
-        </a>
-        <p style="font-size:11px; text-align:center; color:var(--muted); margin-top:10px;">*Frete por conta do cliente.</p>
-    </div>
-  </div>
-
-  <script>
-    // Inicializa Ícones
-    lucide.createIcons();
-
-    // Menu Mobile
-    function toggleMenu() {
-        document.getElementById('mobileMenu').classList.toggle('active');
-        document.querySelector('.mobile-overlay').classList.toggle('active');
-    }
-
-    // Modal Delivery
-    function openModal() { document.getElementById('deliveryModal').classList.add('open'); }
-    function closeModal() { document.getElementById('deliveryModal').classList.remove('open'); }
-
-    // Formulário -> WhatsApp
-    document.getElementById('leadForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome').value;
-        const msg = document.getElementById('msg').value;
-        const cidade = document.getElementById('cidade').value;
-        
-        const textoZap = `*Nova Triagem (Site):*%0A%0A👤 *Nome:* ${nome}%0A🏙 *Cidade:* ${cidade}%0A🔧 *Problema:* ${msg}`;
-        
-        window.open(`https://wa.me/553132124480?text=${textoZap}`, '_blank');
-    });
-  </script>
+        // Formulário envia para o WhatsApp
+        document.getElementById('leadForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            let nome = document.getElementById('nome').value;
+            let aparelho = document.getElementById('aparelho').value;
+            let cidade = document.getElementById('cidade').value;
+            let msg = `*Novo Agendamento (Site):*%0A👤 Nome: ${nome}%0A🔧 Aparelho: ${aparelho}%0A📍 Cidade: ${cidade}`;
+            window.open(`https://wa.me/553132124480?text=${msg}`, '_blank');
+        });
+    </script>
 
 </body>
 </html>
