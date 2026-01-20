@@ -3,845 +3,402 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clínica do Secador by Celpe — Assistência Técnica com cuidado de clínica</title>
-  <meta name="description" content="Agende o conserto do seu secador com padrão de clínica: diagnóstico, reparo, teste e garantia. Celpe — Clínica do Secador." />
+  
+  <title>Clínica do Secador by Celpe — Saúde para seu Equipamento</title>
+  <meta name="description" content="Assistência técnica especializada em secadores e equipamentos de beleza. Padrão de clínica em Belo Horizonte. Aceitamos Uber Flash." />
+  <meta property="og:title" content="Clínica do Secador by Celpe">
+  <meta property="og:description" content="Seu secador parou? Agende um diagnóstico com padrão de clínica.">
+  <meta property="og:image" content="https://celpe.tec.br/assets/banner-celpe.jpg">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root{
-      /* Paleta “amor + saúde + assinatura Celpe” */
-      --health-900:#0B2B3A;   /* azul/teal profundo (confiança/saúde) */
+      /* Identidade Visual Clínica Celpe */
+      --health-900:#0B2B3A;   /* Azul Profundo */
       --health-700:#0E4A62;
-      --health-500:#1C8FB3;   /* teal vivo */
-      --love-500:#FF3D6E;     /* toque de amor (rosa) */
-      --celpe-500:#FF7A18;    /* assinatura exclusiva (laranja Celpe) */
+      --health-500:#1C8FB3;   /* Azul Hospitalar/Clean */
+      --love-500:#FF3D6E;     /* Rosa (Cuidado/Amor) */
+      --celpe-500:#FF7A18;    /* Laranja (Energia/Celpe) */
       --bg:#F6FAFC;
       --card:#FFFFFF;
       --text:#10212B;
       --muted:#5A6B76;
       --line:#E4EEF3;
-      --shadow:0 10px 30px rgba(11,43,58,.12);
+      --shadow:0 10px 30px rgba(11,43,58,.08);
       --radius:18px;
-      --radius-sm:14px;
       --max:1120px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    html{scroll-behavior: smooth;}
+    body{margin:0;padding:0;font-family:system-ui,-apple-system,Inter,sans-serif;color:var(--text);background:var(--bg)}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     button,input,select,textarea{font:inherit}
 
-    /* Top bar */
-    .topbar{
-      background:linear-gradient(90deg,var(--health-900),var(--health-700));
-      color:#fff;
-      padding:10px 0;
-      font-size:14px;
-    }
+    /* --- LAYOUT GERAL --- */
     .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+    
+    /* Topbar */
+    .topbar{background:linear-gradient(90deg,var(--health-900),var(--health-700));color:#fff;padding:10px 0;font-size:13px;}
     .topbar .row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .badge{
-      display:inline-flex;gap:10px;align-items:center;
-      padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
-    }
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--celpe-500);box-shadow:0 0 0 6px rgba(255,122,24,.18)}
-    .top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .mini{opacity:.9}
-    .mini strong{opacity:1}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.15);}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--celpe-500);box-shadow:0 0 0 4px rgba(255,122,24,.2)}
 
     /* Header */
-    header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(246,250,252,.85);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:14px 0;
-    }
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0;}
+    .nav{display:flex;align-items:center;justify-content:space-between;}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:44px;height:44px;border-radius:14px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--health-500),var(--health-700));
-      box-shadow: 0 8px 22px rgba(28,143,179,.18);
-      overflow:hidden;
-    }
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .brand h1{font-size:15px;margin:0;line-height:1.1}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
-    nav ul{list-style:none;display:flex;gap:16px;margin:0;padding:0;align-items:center}
-    nav a{font-size:14px;color:var(--muted)}
-    nav a:hover{color:var(--text)}
+    /* Logo: Ajuste para caber sua imagem */
+    .logo-img { height: 45px; width: auto; object-fit: contain; } 
+    
+    /* Menu Desktop */
+    .desktop-menu ul{list-style:none;display:flex;gap:24px;margin:0;padding:0;align-items:center}
+    .desktop-menu a{font-size:14px;font-weight:500;color:var(--muted);transition:0.2s}
+    .desktop-menu a:hover{color:var(--health-500)}
+    
+    /* Botão CTA */
     .cta{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:999px;
-      border:1px solid rgba(255,122,24,.35);
-      background:linear-gradient(135deg,rgba(255,122,24,.14),rgba(255,61,110,.10));
-      color:var(--text);
-      box-shadow:0 10px 22px rgba(255,122,24,.12);
-      font-weight:700;
-      cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:99px;
+      background:linear-gradient(135deg,var(--celpe-500),#FF9F56);color:#fff;
+      font-weight:700;box-shadow:0 8px 20px rgba(255,122,24,.25);transition:0.2s;border:none;cursor:pointer;
     }
-    .cta:hover{transform:translateY(-1px)}
-    .cta small{font-weight:600;color:var(--muted)}
-    .hamb{display:none}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(255,122,24,.35);}
+
+    /* Menu Mobile Botão */
+    .hamb-btn { display: none; background: none; border: none; cursor: pointer; color: var(--health-900); }
+
+    /* Menu Mobile Gaveta */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; height: 100vh; width: 280px;
+      background: white; z-index: 100; transform: translateX(100%); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.1); padding: 30px; display: flex; flex-direction: column; gap: 20px;
+    }
+    .mobile-menu.active { transform: translateX(0); }
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; 
+      opacity: 0; pointer-events: none; transition: 0.3s;
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+    .close-btn { align-self: flex-end; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); }
 
     /* Hero */
-    .hero{
-      padding:26px 0 10px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
-      align-items:center;
-    }
-    .kicker{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;border-radius:999px;
-      background:#fff;border:1px solid var(--line);
-      box-shadow: 0 10px 22px rgba(11,43,58,.06);
-      color:var(--muted);
-      font-size:13px;
-    }
-    .kicker b{color:var(--health-700)}
-    .hero h2{
-      font-size:42px;line-height:1.05;margin:12px 0 12px;
-      letter-spacing:-.02em;
-    }
-    .hero h2 .love{color:var(--love-500)}
-    .hero h2 .celpe{color:var(--celpe-500)}
-    .hero p{margin:0 0 16px;color:var(--muted);font-size:16px;max-width:58ch}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:14px 16px;border-radius:999px;border:1px solid var(--line);
-      background:#fff;cursor:pointer;font-weight:800;
-    }
-    .btn.primary{
-      border-color: transparent;
-      color:#fff;
-      background:linear-gradient(135deg,var(--health-700),var(--health-500));
-      box-shadow: 0 14px 30px rgba(28,143,179,.22);
-    }
-    .btn.primary:hover{filter:brightness(1.02)}
-    .btn.secondary{
-      background:linear-gradient(135deg,rgba(255,122,24,.12),rgba(255,61,110,.10));
-      border:1px solid rgba(255,122,24,.28);
-    }
-    .pill{
-      display:flex;gap:12px;flex-wrap:wrap;margin-top:14px
-    }
-    .chip{
-      background:#fff;border:1px solid var(--line);
-      padding:10px 12px;border-radius:999px;
-      color:var(--muted);font-size:13px;
-      display:inline-flex;align-items:center;gap:8px;
-    }
-    .chip i{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--health-500);display:inline-block
-    }
+    .hero{padding:40px 0 60px;}
+    .hero-grid{display:grid;grid-template-columns: 1.1fr 0.9fr;gap:40px;align-items:center;}
+    .hero h1{font-size:42px;line-height:1.1;margin:16px 0;letter-spacing:-1px;color:var(--health-900);}
+    .hero p{font-size:18px;color:var(--muted);line-height:1.6;margin-bottom:24px;max-width:500px;}
+    
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:700;transition:0.2s;cursor:pointer;}
+    .btn-primary{background:var(--health-900);color:white;border:none;}
+    .btn-primary:hover{background:var(--health-700);}
+    .btn-outline{background:white;border:1px solid var(--line);color:var(--health-700);}
+    .btn-outline:hover{background:#F8FBFC;border-color:var(--health-500);}
 
+    /* Card da Foto (Enfermeira) */
     .hero-card{
-      background:linear-gradient(180deg,#fff,rgba(255,255,255,.86));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); border: 4px solid #fff;
+      aspect-ratio: 4/5; /* Formato retrato para a enfermeira */
     }
-    .hero-card .imgwrap{
-      aspect-ratio: 4/3;
-      background: radial-gradient(circle at 20% 20%, rgba(255,122,24,.16), transparent 40%),
-                  radial-gradient(circle at 80% 20%, rgba(255,61,110,.12), transparent 45%),
-                  radial-gradient(circle at 50% 80%, rgba(28,143,179,.16), transparent 45%);
-      display:grid;place-items:center;
-    }
-    .hero-card img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position: center 15%;
-    }
-    .hero-card .caption{
-      padding:14px 16px;
-      display:flex;gap:12px;align-items:flex-start;justify-content:space-between
-    }
-    .caption strong{display:block}
-    .caption span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-    .tag{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 12px;border-radius:999px;
-      background:rgba(28,143,179,.10);
-      border:1px solid rgba(28,143,179,.18);
-      color:var(--health-700);
-      font-weight:800;font-size:12px;
-      white-space:nowrap;
+    .hero-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-tag {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(5px);
+      padding: 15px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
 
-    /* Sections */
-    section{padding:34px 0}
-    .section-title{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
-      margin-bottom:14px;
-    }
-    .section-title h3{margin:0;font-size:26px;letter-spacing:-.01em}
-    .section-title p{margin:0;color:var(--muted);max-width:70ch}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow: 0 12px 26px rgba(11,43,58,.06);
-      padding:16px;
-    }
-    .card h4{margin:0 0 6px;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .icon{
-      width:44px;height:44px;border-radius:16px;display:grid;place-items:center;
-      background:linear-gradient(135deg,rgba(255,122,24,.16),rgba(28,143,179,.14));
-      border:1px solid rgba(255,122,24,.20);
-      margin-bottom:12px;
-    }
+    /* Cards e Grid */
+    section{padding:50px 0;}
+    .section-title h2{font-size:32px;color:var(--health-900);margin:0 0 10px;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .card{background:white;padding:24px;border-radius:var(--radius);border:1px solid var(--line);transition:0.2s;}
+    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--health-500);}
+    .icon-box{width:48px;height:48px;border-radius:12px;background:rgba(28,143,179,.1);color:var(--health-500);display:grid;place-items:center;margin-bottom:16px;}
 
-    /* Pricing table */
-    .price{
-      display:flex;flex-direction:column;gap:10px
-    }
-    .price .row{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:12px 14px;border-radius:14px;border:1px solid var(--line);
-      background:linear-gradient(180deg,#fff,rgba(255,255,255,.86));
-    }
-    .price .row b{font-size:14px}
-    .money{
-      font-weight:900;
-      color:var(--health-900);
-    }
-    .hint{font-size:12px;color:var(--muted);margin-top:8px}
+    /* Tabela de Preços */
+    .price-row{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--line);}
+    .price-val{font-weight:800;color:var(--health-700);font-size:18px;}
 
-    /* Stats */
-    .stats{
-      background: linear-gradient(135deg, rgba(28,143,179,.10), rgba(255,61,110,.08), rgba(255,122,24,.10));
-      border:1px solid rgba(28,143,179,.18);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
-    }
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .stat{
-      background:#fff;border:1px solid var(--line);border-radius:16px;
-      padding:14px;
-    }
-    .stat strong{font-size:24px;display:block}
-    .stat span{color:var(--muted);font-size:13px}
-
-    /* Form */
-    form .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input,select,textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-      outline:none;
-    }
-    input:focus,select:focus,textarea:focus{
-      border-color: rgba(28,143,179,.45);
-      box-shadow: 0 0 0 4px rgba(28,143,179,.10);
-    }
-    textarea{min-height:110px;resize:vertical}
-    .agree{
-      margin-top:12px;
-      display:flex;gap:10px;align-items:flex-start;
-      padding:12px;border-radius:14px;background:#fff;border:1px solid var(--line);
-      color:var(--muted);font-size:13px;
-    }
-    .agree input{width:auto;margin-top:2px}
-    .form-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
-    .note{font-size:12px;color:var(--muted)}
-    .success{
-      display:none;
-      margin-top:12px;
-      padding:12px 14px;border-radius:14px;
-      border:1px solid rgba(28,143,179,.25);
-      background: rgba(28,143,179,.08);
-      color: var(--health-700);
-      font-weight:700;
-    }
-
-    /* Steps */
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .step{
-      padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line);
-      position:relative;
-    }
-    .step .n{
-      width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
-      background:linear-gradient(135deg,rgba(28,143,179,.18),rgba(255,122,24,.16));
-      border:1px solid rgba(28,143,179,.20);
-      font-weight:900;color:var(--health-700);
-      margin-bottom:10px;
-    }
-    .step h4{margin:0 0 6px}
-    .step p{margin:0;color:var(--muted);font-size:13px}
-
-    /* Units */
-    .units{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .unit{
-      background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px
-    }
-    .unit b{display:block}
-    .unit span{color:var(--muted);font-size:13px}
+    /* Formulário */
+    .form-box{background:white;padding:30px;border-radius:var(--radius);box-shadow:var(--shadow);}
+    input, select, textarea{width:100%;padding:12px;margin-bottom:12px;border:1px solid var(--line);border-radius:8px;outline:none;}
+    input:focus{border-color:var(--health-500);box-shadow:0 0 0 3px rgba(28,143,179,.1);}
 
     /* Footer */
-    footer{
-      padding:28px 0;
-      border-top:1px solid var(--line);
-      background:#fff;
+    footer{background:white;padding:40px 0;border-top:1px solid var(--line);margin-top:40px;}
+    
+    /* MODAL DE DELIVERY */
+    .modal {
+        display: none; position: fixed; inset: 0; z-index: 200;
+        align-items: center; justify-content: center; padding: 20px;
     }
-    .foot{
-      display:grid;grid-template-columns: 1.2fr .8fr .8fr .8fr;gap:12px
+    .modal.open { display: flex; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(11, 43, 58, 0.6); backdrop-filter: blur(4px); }
+    .modal-content {
+        background: white; width: 100%; max-width: 450px; border-radius: 20px;
+        position: relative; z-index: 210; padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        animation: modalUp 0.3s ease-out;
     }
-    .foot h5{margin:0 0 10px}
-    .foot a{display:block;color:var(--muted);padding:6px 0;font-size:14px}
-    .foot a:hover{color:var(--text)}
-    .fineprint{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.5}
+    @keyframes modalUp { from {transform: translateY(20px); opacity:0;} to {transform: translateY(0); opacity:1;} }
+    .step-item { display: flex; gap: 15px; margin-bottom: 15px; background: #F8FAFC; padding: 12px; border-radius: 12px; }
+    .step-num { 
+        background: var(--health-500); color: white; width: 24px; height: 24px; 
+        border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; flex-shrink: 0; margin-top: 2px;
+    }
 
-    /* Floating WhatsApp */
-    .wa{
-      position:fixed;right:18px;bottom:18px;z-index:60;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 14px;border-radius:999px;
-      background:linear-gradient(135deg,#25D366,#1CCB5F);
-      color:#fff;font-weight:900;
-      box-shadow:0 16px 36px rgba(0,0,0,.18);
-    }
-    .wa:hover{filter:brightness(1.02)}
-    .wa svg{width:18px;height:18px}
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero h2{font-size:38px}
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      .stats-grid{grid-template-columns:1fr}
-      form .fields{grid-template-columns:1fr}
-      .steps{grid-template-columns:1fr 1fr}
-      .units{grid-template-columns:1fr 1fr}
-      nav ul{display:none}
-      .hamb{display:inline-flex}
-    }
-    @media (max-width: 520px){
-      .hero h2{font-size:32px}
-      .steps{grid-template-columns:1fr}
-      .units{grid-template-columns:1fr}
+    /* Responsivo */
+    @media (max-width: 900px){
+        .desktop-menu { display: none; }
+        .hamb-btn { display: block; }
+        .hero-grid { grid-template-columns: 1fr; text-align: center; }
+        .hero p { margin: 0 auto 24px; }
+        .hero-actions { justify-content: center; }
+        .hero-card { max-width: 400px; margin: 0 auto; aspect-ratio: 1/1; }
+        .grid-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
-<body>
-  <!-- Top bar -->
+<body id="topo">
+
   <div class="topbar">
     <div class="wrap">
       <div class="row">
         <div class="badge">
           <span class="dot"></span>
-          <span><strong>Agende seu conserto</strong> — atendimento com padrão de clínica</span>
+          <span><strong>Clínica do Secador</strong> — Cuidado profissional para seu equipamento</span>
         </div>
-        <div class="top-actions mini">
-          <span><strong>WhatsApp:</strong> (31) 9XXXX-XXXX</span>
-          <span>•</span>
-          <span><strong>Horário:</strong> Seg–Sáb 08h–18h</span>
+        <div style="opacity: 0.9">
+          📍 Rua São Paulo, 265 - Centro, BH
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
   <header>
     <div class="wrap">
       <div class="nav">
-        <a class="brand" href="#topo" aria-label="Ir para o início">
-          <div class="logo" aria-hidden="true">
-            <!-- Se tiver logo, coloque em assets/logo.png e descomente abaixo -->
-            <!-- <img src="assets/logo.png" alt="Logo Clínica do Secador by Celpe" /> -->
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 2c2.8 0 5 2.2 5 5 0 1.2-.4 2.2-1 3.1l3.7 3.7c.8.8.8 2.1 0 2.9-.8.8-2.1.8-2.9 0L13 16.9c-.9.6-2 .9-3 .9-2.8 0-5-2.2-5-5s2.2-5 5-5Z" stroke="white" stroke-width="1.6"/>
-              <path d="M7.5 12.2h4.8" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div>
-            <h1>Clínica do Secador <span style="color:var(--celpe-500)">by Celpe</span></h1>
-            <p>Assistência técnica com carinho, teste e garantia</p>
-          </div>
+        <a class="brand" href="#topo">
+          <img src="assets/logo.png" alt="Celpe Logo" class="logo-img" />
         </a>
 
-        <nav aria-label="Navegação principal">
+        <nav class="desktop-menu">
           <ul>
-            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#servicos">Especialidades</a></li>
             <li><a href="#tabela">Tabela</a></li>
             <li><a href="#processo">Como funciona</a></li>
-            <li><a href="#unidades">Unidades</a></li>
-            <li><a href="#contato">Agendar</a></li>
+            <li>
+                <button onclick="openModal()" class="btn-outline" style="padding: 8px 16px; border-radius: 99px; display:flex; align-items:center; gap:6px; font-size:13px;">
+                    <i data-lucide="bike" width="16"></i> Enviar por Uber
+                </button>
+            </li>
           </ul>
         </nav>
 
-        <a class="cta" href="#contato">
-          <span>Agendar agora</span>
-          <small>em 1 minuto</small>
-        </a>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <a href="#contato" class="cta">
+              <i data-lucide="calendar-check" width="18"></i> Agendar
+            </a>
+            <button class="hamb-btn" onclick="toggleMenu()" aria-label="Menu">
+              <i data-lucide="menu" width="28"></i>
+            </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <main id="topo" class="hero">
+  <div class="mobile-overlay" onclick="toggleMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="toggleMenu()"><i data-lucide="x"></i></button>
+    <a href="#servicos" onclick="toggleMenu()">Especialidades</a>
+    <a href="#tabela" onclick="toggleMenu()">Tabela de Preços</a>
+    <a href="#processo" onclick="toggleMenu()">Como funciona</a>
+    <hr style="border:0; border-top:1px solid #eee; width:100%;">
+    <button onclick="openModal(); toggleMenu();" style="text-align:left; color:var(--health-500); font-weight:700; background:none; border:none; display:flex; gap:10px;">
+        <i data-lucide="bike"></i> Enviar por Uber
+    </button>
+  </div>
+
+  <main class="hero">
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <div class="kicker">
-            <span style="width:10px;height:10px;border-radius:50%;background:var(--love-500)"></span>
-            <span><b>Amor + Técnica</b> para o seu secador voltar perfeito</span>
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(28,143,179,.1); color:var(--health-700); padding:6px 12px; border-radius:99px; font-size:13px; font-weight:600; margin-bottom:16px;">
+            <i data-lucide="heart-pulse" width="16"></i> Quem ama, cuida
           </div>
 
-          <h2>
-            Aqui seu secador é tratado como <span class="love">paciente</span> — com diagnóstico, reparo e <span class="celpe">teste</span>.
-          </h2>
+          <h1>
+            Seu secador é tratado como <span style="color:var(--love-500)">paciente</span>.
+          </h1>
 
           <p>
-            Um novo conceito em assistência técnica: atendimento acolhedor, processo transparente e padrão de qualidade
-            para secadores, chapinhas, escovas rotativas e modeladores.
+            Assistência técnica com padrão de clínica. Diagnóstico preciso, peças originais e checklist de segurança para seu instrumento de trabalho.
           </p>
 
           <div class="hero-actions">
-            <a class="btn primary" href="#contato">Agendar conserto</a>
-            <a class="btn secondary" href="#tabela">Ver tabela de serviços</a>
-            <a class="btn" href="#processo">Como funciona</a>
+            <a href="#contato" class="btn btn-primary">
+                <i data-lucide="message-circle"></i> Agendar Triagem
+            </a>
+            <button onclick="openModal()" class="btn btn-outline">
+                <i data-lucide="package-search"></i> Como enviar?
+            </button>
           </div>
-
-          <div class="pill" aria-label="Destaques rápidos">
-            <span class="chip"><i></i> Diagnóstico claro</span>
-            <span class="chip"><i style="background:var(--celpe-500)"></i> Peças e mão de obra</span>
-            <span class="chip"><i style="background:var(--love-500)"></i> Garantia e teste final</span>
+          
+          <div style="margin-top:24px; display:flex; gap:16px; font-size:13px; color:var(--muted);">
+            <span style="display:flex; gap:6px;"><i data-lucide="check-circle" width="16" color="var(--health-500)"></i> Garantia de 4 meses</span>
+            <span style="display:flex; gap:6px;"><i data-lucide="check-circle" width="16" color="var(--health-500)"></i> Peças Originais</span>
           </div>
         </div>
 
-        <div class="hero-card" aria-label="Foto principal">
-          <div class="imgwrap">
-            <!-- Use a foto enviada como assets/enfermeira.jpg -->
-            <img src="assets/enfermeira.jpg" alt="Enfermeira da Clínica do Secador segurando um secador de cabelo" />
-          </div>
-          <div class="caption">
-            <div>
-              <strong>“Quem ama, cuida.”</strong>
-              <span>Seu aparelho passa por triagem, reparo e checklist final.</span>
-            </div>
-            <div class="tag">Padrão de clínica</div>
+        <div class="hero-card">
+          <img src="assets/foto-fundo.png" alt="Especialista Celpe" />
+          
+          <div class="hero-tag">
+            <strong style="color:var(--health-900); display:block;">Padrão Clínico</strong>
+            <span style="font-size:13px; color:var(--muted);">Triagem • Reparo • Teste</span>
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Serviços / Áreas de atuação -->
   <section id="servicos">
     <div class="wrap">
       <div class="section-title">
-        <div>
-          <h3>Nossas áreas de atuação</h3>
-          <p>Inspirado na lógica do PDF (áreas médicas), aqui viram “áreas técnicas” da Clínica do Secador. :contentReference[oaicite:1]{index=1}</p>
-        </div>
-        <a class="btn" href="#contato">Agendar</a>
+        <h2>Especialidades da Clínica</h2>
+        <p style="color:var(--muted)">Atuamos como um hospital para seus aparelhos.</p>
       </div>
 
-      <div class="grid-3">
+      <div class="grid-3" style="margin-top:30px;">
         <div class="card">
-          <div class="icon">🔧</div>
+          <div class="icon-box"><i data-lucide="wind"></i></div>
           <h4>Secadores</h4>
-          <p>Troca de cabo, resistência, motor, escova de carvão, chave seletora, limpeza técnica e revisão geral.</p>
+          <p style="color:var(--muted); font-size:14px;">Troca de motor, cabo, resistência e limpeza técnica preventiva.</p>
         </div>
         <div class="card">
-          <div class="icon">⚡</div>
-          <h4>Chapinhas / Pranchas</h4>
-          <p>Placas, cabo giratório, termostato, aquecimento irregular, mau contato e ajustes.</p>
+          <div class="icon-box"><i data-lucide="zap"></i></div>
+          <h4>Chapinhas</h4>
+          <p style="color:var(--muted); font-size:14px;">Reparo de placas, aquecimento irregular e termostatos.</p>
         </div>
         <div class="card">
-          <div class="icon">🌀</div>
-          <h4>Escovas rotativas</h4>
-          <p>Motor, engrenagens, aquecimento, ruído, travamento, e manutenção preventiva.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🌬️</div>
-          <h4>Modeladores / Babyliss</h4>
-          <p>Aquecimento, cabo, contato interno, acionamento e revisão completa.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🧪</div>
-          <h4>Diagnóstico & Checklist</h4>
-          <p>Triagem profissional, orçamento claro e teste final (aquecimento, ventilação e segurança).</p>
-        </div>
-        <div class="card">
-          <div class="icon">🧰</div>
-          <h4>Manutenção preventiva</h4>
-          <p>Limpeza interna, revisão de conexões e prevenção de queima por sobrecarga/poeira.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tabela (equivalente à “tabela nacional”) -->
-  <section id="tabela">
-    <div class="wrap">
-      <div class="section-title">
-        <div>
-          <h3>Tabela base de serviços</h3>
-          <p>Modelo semelhante ao “tabela nacional” do PDF, adaptado para serviços técnicos (valores editáveis). :contentReference[oaicite:2]{index=2}</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
+          <div class="icon-box"><i data-lucide="activity"></i></div>
           <h4>Diagnóstico</h4>
-          <div class="price">
-            <div class="row">
-              <span>Triagem + orçamento</span>
-              <span class="money">R$ 30,00</span>
-            </div>
-            <div class="row">
-              <span>Diagnóstico avançado (placa/eletrônica)</span>
-              <span class="money">R$ 60,00</span>
-            </div>
-          </div>
-          <div class="hint">*Se aprovar o conserto, o diagnóstico pode ser abatido (defina sua regra).</div>
-        </div>
-
-        <div class="card">
-          <h4>Reparos comuns</h4>
-          <div class="price">
-            <div class="row">
-              <span>Troca de cabo / plug</span>
-              <span class="money">a partir de R$ 40,00</span>
-            </div>
-            <div class="row">
-              <span>Revisão + limpeza técnica</span>
-              <span class="money">a partir de R$ 60,00</span>
-            </div>
-            <div class="row">
-              <span>Motor / resistência / peças internas</span>
-              <span class="money">sob orçamento</span>
-            </div>
-          </div>
-          <div class="hint">*Valores variam por marca/modelo e necessidade de peças.</div>
+          <p style="color:var(--muted); font-size:14px;">Check-up completo para identificar falhas antes que o aparelho pare.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Números / Prova social -->
-  <section>
+  <section id="contato" style="background:var(--line);">
     <div class="wrap">
-      <div class="stats" role="region" aria-label="Números da Clínica do Secador">
-        <div class="section-title" style="margin:0 0 14px">
-          <div>
-            <h3>Clínica do Secador: conceito pronto para crescer</h3>
-            <p>Assim como o PDF mostra escala (unidades/atendimentos), aqui você mostra autoridade e visão de franquias. :contentReference[oaicite:3]{index=3}</p>
-          </div>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat">
-            <strong>+500</strong>
-            <span>aparelhos consertados (exemplo)</span>
-          </div>
-          <div class="stat">
-            <strong>12</strong>
-            <span>tipos de reparos padronizados</span>
-          </div>
-          <div class="stat">
-            <strong>Garantia</strong>
-            <span>processo com teste final e checklist</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tour / Experiência -->
-  <section>
-    <div class="wrap">
-      <div class="grid-2">
-        <div class="card">
-          <h4>Veja a oficina por dentro (Tour 360)</h4>
-          <p>Coloque aqui um link do Google Street View, vídeo do Instagram, ou um tour 360. Fica igual ao bloco do PDF, mas com sua oficina.</p>
-          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn primary" href="#" onclick="alert('Depois você coloca o link do tour 360 aqui 🙂'); return false;">Fazer Tour 360</a>
-            <a class="btn" href="#contato">Agendar</a>
-          </div>
-        </div>
-        <div class="card">
-          <h4>Excelência reconhecida</h4>
-          <p>Crie confiança: padrão de atendimento, organização, transparência e garantia. Se tiver avaliações (Google), coloque o link aqui.</p>
-          <div style="margin-top:12px" class="grid-2">
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">⭐ Avaliações</h4>
-              <p>Google/Instagram (coloque seus números reais)</p>
-            </div>
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">🛡️ Garantia</h4>
-              <p>Termos claros e checklist final</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Como funciona -->
-  <section id="processo">
-    <div class="wrap">
-      <div class="section-title">
+      <div class="grid-3" style="grid-template-columns: 1fr 1.5fr;">
         <div>
-          <h3>Como funciona (padrão de clínica)</h3>
-          <p>É o mesmo “fluxo” do PDF (agendamento → acolhimento → atendimento → pós), só que aplicado ao conserto. :contentReference[oaicite:4]{index=4}</p>
+            <h2>Agende sua consulta</h2>
+            <p style="color:var(--muted); margin-bottom:20px;">Preencha a ficha e nossa equipe já recebe seu caso no WhatsApp.</p>
+            
+            <div style="background:white; padding:20px; border-radius:12px;">
+                <h4 style="margin:0 0 10px 0;">Matriz Belo Horizonte</h4>
+                <p style="font-size:14px; color:var(--muted); margin:0;">Rua São Paulo, 265 - Sobreloja<br>Centro - BH</p>
+            </div>
         </div>
-      </div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="n">1</div>
-          <h4>Agendamento</h4>
-          <p>Você agenda pelo WhatsApp ou formulário e descreve o problema do aparelho.</p>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <h4>Triagem</h4>
-          <p>Fazemos diagnóstico e enviamos orçamento claro (com prazos e opções).</p>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <h4>Reparo + Teste</h4>
-          <p>Conserto técnico e checklist final (aquecimento/ventilação/segurança).</p>
-        </div>
-        <div class="step">
-          <div class="n">4</div>
-          <h4>Pós-atendimento</h4>
-          <p>Entrega com orientações e garantia. Você avalia e mantém seu aparelho em dia.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="form-box">
+            <form id="leadForm">
+                <label style="font-size:13px; font-weight:bold; color:var(--muted);">NOME DO PROFISSIONAL</label>
+                <input type="text" id="nome" placeholder="Seu nome" required>
 
-  <!-- Unidades / visão franquias -->
-  <section id="unidades">
-    <div class="wrap">
-      <div class="section-title">
-        <div>
-          <h3>Nossas unidades</h3>
-          <p>Hoje: unidade principal. Amanhã: franquias. Deixe o layout pronto para escalar igual o PDF. :contentReference[oaicite:5]{index=5}</p>
-        </div>
-        <a class="btn" href="#contato">Encontrar unidade</a>
-      </div>
+                <label style="font-size:13px; font-weight:bold; color:var(--muted);">APARELHO / SINTOMAS</label>
+                <textarea id="msg" rows="3" placeholder="Ex: Secador Taiff parou de aquecer..." required></textarea>
 
-      <div class="units">
-        <div class="unit">
-          <b>Belo Horizonte</b>
-          <span>MG • Unidade Matriz</span>
-        </div>
-        <div class="unit">
-          <b>Em breve</b>
-          <span>SP • Pré-cadastro franquia</span>
-        </div>
-        <div class="unit">
-          <b>Em breve</b>
-          <span>RJ • Pré-cadastro franquia</span>
-        </div>
-        <div class="unit">
-          <b>Em breve</b>
-          <span>PR • Pré-cadastro franquia</span>
+                <label style="font-size:13px; font-weight:bold; color:var(--muted);">CIDADE</label>
+                <input type="text" id="cidade" placeholder="Ex: Belo Horizonte" required>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                    Enviar para Triagem <i data-lucide="send"></i>
+                </button>
+            </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contato / Form -->
-  <section id="contato">
-    <div class="wrap">
-      <div class="section-title">
-        <div>
-          <h3>Receba conteúdos cheios de amor para o seu secador 💙</h3>
-          <p>Formulário no estilo do PDF, com LGPD e captação para contato/retorno. :contentReference[oaicite:6]{index=6}</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h4>Agende seu atendimento</h4>
-          <p>Preencha e a equipe retorna com o melhor horário e o orçamento inicial.</p>
-
-          <form id="leadForm">
-            <div class="fields">
-              <div>
-                <label for="nome">Nome*</label>
-                <input id="nome" name="nome" required placeholder="Seu nome" />
-              </div>
-              <div>
-                <label for="whats">WhatsApp*</label>
-                <input id="whats" name="whats" required placeholder="(DDD) 9XXXX-XXXX" />
-              </div>
-              <div>
-                <label for="cidade">Cidade*</label>
-                <input id="cidade" name="cidade" required placeholder="Sua cidade" />
-              </div>
-              <div>
-                <label for="estado">Estado</label>
-                <select id="estado" name="estado">
-                  <option value="">Selecione</option>
-                  <option>MG</option><option>SP</option><option>RJ</option><option>PR</option>
-                  <option>SC</option><option>RS</option><option>ES</option><option>BA</option>
-                </select>
-              </div>
-            </div>
-
-            <div style="margin-top:12px">
-              <label for="msg">Qual aparelho e qual problema?</label>
-              <textarea id="msg" name="msg" placeholder="Ex: Secador Taiff, liga mas não aquece. Cheiro de queimado."></textarea>
-            </div>
-
-            <div class="agree">
-              <input type="checkbox" id="lgpd" required />
-              <label for="lgpd">
-                Li e concordo com a captação dos dados para contato solicitado (LGPD). Autorizo o compartilhamento com parceiros
-                necessários para o atendimento (ex.: logística/fornecedores), conforme Política de Privacidade.
-              </label>
-            </div>
-
-            <div class="form-actions">
-              <button class="btn primary" type="submit">Enviar</button>
-              <a class="btn" href="https://wa.me/55SEU_NUMERO_AQUI" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-              <span class="note">Resposta normalmente em até 30 min em horário comercial.</span>
-            </div>
-
-            <div class="success" id="successBox">
-              ✅ Recebido! Já já a equipe te chama no WhatsApp para confirmar o agendamento.
-            </div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h4>Atendimento com transparência</h4>
-          <p>O foco é confiança e padrão de qualidade (igual “clínica”).</p>
-
-          <div style="margin-top:14px" class="grid-2">
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">🧾 Orçamento claro</h4>
-              <p>Você aprova antes de qualquer troca de peça.</p>
-            </div>
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">🧰 Peças confiáveis</h4>
-              <p>Reposição compatível e teste de funcionamento.</p>
-            </div>
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">🧪 Checklist final</h4>
-              <p>Aquecimento, ventilação, ruído e segurança.</p>
-            </div>
-            <div class="card" style="box-shadow:none">
-              <h4 style="margin:0 0 6px">🛡️ Garantia</h4>
-              <p>Condições simples e registradas no atendimento.</p>
-            </div>
-          </div>
-
-          <p class="hint">
-            *A Clínica do Secador não vende “milagre”: trabalho técnico, com limites reais e explicação do que compensa reparar.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div>
-          <h5>Clínica do Secador</h5>
-          <div style="color:var(--muted);font-size:14px;line-height:1.6">
-            <div><strong>by Celpe</strong> — assistência técnica com cuidado de clínica.</div>
-            <div>Endereço: Rua X, nº Y — Belo Horizonte/MG</div>
-            <div>Telefone: (31) 3XXX-XXXX</div>
-          </div>
-        </div>
-        <div>
-          <h5>Institucional</h5>
-          <a href="#">Quem somos</a>
-          <a href="#">Trabalhe conosco</a>
-          <a href="#">Ajuda</a>
-        </div>
-        <div>
-          <h5>Serviços</h5>
-          <a href="#servicos">Secadores</a>
-          <a href="#servicos">Chapinhas</a>
-          <a href="#servicos">Escovas rotativas</a>
-          <a href="#tabela">Tabela</a>
-        </div>
-        <div>
-          <h5>Políticas</h5>
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Garantia</a>
-          <a href="#">LGPD</a>
-        </div>
-      </div>
-
-      <div class="fineprint">
-        <strong>Nota:</strong> Este site é um modelo pronto para escalar (multi-unidades/franquias).  
-        Ajuste textos, números, tabela e políticas conforme sua operação real.
-      </div>
+    <div class="wrap" style="text-align:center;">
+        <img src="assets/logo.png" alt="Celpe" style="height:35px; margin:0 auto 20px auto; opacity:0.8;">
+        <p style="font-size:13px; color:var(--muted);">© 2026 Celpe Assistência Técnica. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- WhatsApp floating -->
-  <a class="wa" href="https://wa.me/55SEU_NUMERO_AQUI" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M20 11.6c0 4.6-3.8 8.4-8.4 8.4-1.4 0-2.8-.4-4-.9L4 20l.9-3.4c-.6-1.2-.9-2.6-.9-4C4 7 7.8 3.2 12.4 3.2 16.2 3.2 20 7 20 11.6Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
-      <path d="M9.2 8.7c.2-.4.4-.4.6-.4h.5c.1 0 .3 0 .4.3l.7 1.8c.1.3.1.5-.1.7l-.5.6c-.1.1-.1.3 0 .4.5.9 1.3 1.7 2.2 2.2.1.1.3.1.4 0l.6-.5c.2-.2.4-.2.7-.1l1.8.7c.3.1.3.3.3.4v.5c0 .2 0 .4-.4.6-.4.3-1.2.6-2 .4-1.9-.4-4.9-3.4-5.3-5.3-.2-.8.1-1.6.4-2Z" fill="white"/>
-    </svg>
-    WhatsApp
-  </a>
+  <div class="modal" id="deliveryModal">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="modal-content">
+        <button onclick="closeModal()" style="position:absolute; top:15px; right:15px; background:none; border:none; cursor:pointer;"><i data-lucide="x"></i></button>
+        
+        <div style="text-align:center; margin-bottom:20px;">
+            <div style="width:60px; height:60px; background:#E0F2FE; color:var(--health-500); border-radius:50%; display:grid; place-items:center; margin:0 auto 10px auto;">
+                <i data-lucide="bike" width="30"></i>
+            </div>
+            <h3 style="margin:0; color:var(--health-900);">Envio por Uber/Loggi</h3>
+            <p style="font-size:14px; color:var(--muted);">Consertamos sem você sair do salão.</p>
+        </div>
+
+        <div class="step-item">
+            <span class="step-num">1</span>
+            <div style="font-size:14px;">
+                <strong>Avise no WhatsApp:</strong><br>
+                Confirme se estamos na loja para receber.
+            </div>
+        </div>
+        <div class="step-item">
+            <span class="step-num">2</span>
+            <div style="font-size:14px;">
+                <strong>Chame o Uber Flash:</strong><br>
+                Destino: <b>Rua São Paulo, 265 - Sobreloja</b>
+            </div>
+        </div>
+        <div class="step-item">
+            <span class="step-num">3</span>
+            <div style="font-size:14px;">
+                <strong>Compartilhe:</strong><br>
+                Mande o link da corrida pra gente acompanhar.
+            </div>
+        </div>
+
+        <a href="https://wa.me/553132124480?text=Ol%C3%A1%2C%20quero%20enviar%20por%20Uber%20Flash." target="_blank" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:10px;">
+            Combinar no WhatsApp
+        </a>
+        <p style="font-size:11px; text-align:center; color:var(--muted); margin-top:10px;">*Frete por conta do cliente.</p>
+    </div>
+  </div>
 
   <script>
-    // Simples “envio” do formulário (front-only).
-    // Depois você pode integrar com WhatsApp API, Email, Zapier, Make, etc.
-    const form = document.getElementById('leadForm');
-    const successBox = document.getElementById('successBox');
+    // Inicializa Ícones
+    lucide.createIcons();
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    // Menu Mobile
+    function toggleMenu() {
+        document.getElementById('mobileMenu').classList.toggle('active');
+        document.querySelector('.mobile-overlay').classList.toggle('active');
+    }
 
-      // validação básica
-      const nome = document.getElementById('nome').value.trim();
-      const whats = document.getElementById('whats').value.trim();
-      const cidade = document.getElementById('cidade').value.trim();
-      const lgpd = document.getElementById('lgpd').checked;
+    // Modal Delivery
+    function openModal() { document.getElementById('deliveryModal').classList.add('open'); }
+    function closeModal() { document.getElementById('deliveryModal').classList.remove('open'); }
 
-      if(!nome || !whats || !cidade || !lgpd){
-        alert("Preencha Nome, WhatsApp, Cidade e aceite a LGPD.");
-        return;
-      }
-
-      // Aqui você pode enviar para um endpoint (ex: /api/lead) no futuro
-      successBox.style.display = "block";
-      form.reset();
-
-      // Scroll suave para mostrar confirmação
-      successBox.scrollIntoView({behavior:"smooth", block:"center"});
+    // Formulário -> WhatsApp
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const msg = document.getElementById('msg').value;
+        const cidade = document.getElementById('cidade').value;
+        
+        const textoZap = `*Nova Triagem (Site):*%0A%0A👤 *Nome:* ${nome}%0A🏙 *Cidade:* ${cidade}%0A🔧 *Problema:* ${msg}`;
+        
+        window.open(`https://wa.me/553132124480?text=${textoZap}`, '_blank');
     });
   </script>
+
 </body>
 </html>
