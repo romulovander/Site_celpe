@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="theme-color" content="#003366">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <title>Celpe - Clínica do Secador | Padrão Franquia</title>
     <meta name="description" content="Assistência técnica especializada. Medicina para seu secador e equipamentos.">
@@ -66,7 +64,7 @@
         const WHATSAPP = "553132124480"; 
         const ENDERECO = "Rua São Paulo, 265 - Sobreloja - Centro, BH";
         
-        // --- MODAL DE AÇÃO INTELIGENTE (Menu "Posso Ajudar?") ---
+        // --- MODAL DE AÇÃO (POSSO AJUDAR?) ---
         const ActionModal = ({ isOpen, onClose }) => {
             const [view, setView] = useState('menu'); // menu, busca, entrega
             const [osNumber, setOsNumber] = useState('');
@@ -88,7 +86,7 @@
                             <i data-lucide="x" className="w-8 h-8"></i>
                         </button>
 
-                        {/* VISÃO 1: MENU PRINCIPAL */}
+                        {/* MENU PRINCIPAL */}
                         {view === 'menu' && (
                             <div className="text-center">
                                 <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-theme">
@@ -147,7 +145,7 @@
                             </div>
                         )}
 
-                        {/* VISÃO 2: SOLICITAR BUSCA (Instruções) */}
+                        {/* VISÃO 2: SOLICITAR BUSCA */}
                         {view === 'busca' && (
                             <div>
                                 <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-sm font-bold uppercase"><i data-lucide="arrow-left" className="w-5 h-5"></i> Voltar</button>
@@ -174,7 +172,7 @@
                             </div>
                         )}
 
-                        {/* VISÃO 3: SOLICITAR ENTREGA (Input OS) */}
+                        {/* VISÃO 3: SOLICITAR ENTREGA */}
                         {view === 'entrega' && (
                             <div>
                                 <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-sm font-bold uppercase"><i data-lucide="arrow-left" className="w-5 h-5"></i> Voltar</button>
