@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="theme-color" content="#003366">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="msapplication-navbutton-color" content="#003366">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <title>Celpe - Clínica do Secador | Padrão Franquia</title>
     <meta name="description" content="Assistência técnica especializada. Medicina para seu secador e equipamentos.">
@@ -86,7 +85,7 @@
                     
                     <div className="bg-white w-full md:w-[450px] md:rounded-2xl rounded-t-2xl p-6 relative z-10 modal-enter shadow-2xl">
                         <button onClick={resetAndClose} className="absolute top-4 right-4 text-gray-400 hover:text-theme">
-                            <i data-lucide="x" className="w-6 h-6"></i>
+                            <i data-lucide="x" className="w-8 h-8"></i>
                         </button>
 
                         {/* VISÃO 1: MENU PRINCIPAL */}
@@ -95,53 +94,54 @@
                                 <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-theme">
                                     <i data-lucide="smile" className="w-8 h-8"></i>
                                 </div>
-                                <h3 className="text-xl font-bold text-theme mb-2 font-heading">Posso ajudar?</h3>
-                                <p className="text-sm text-gray-500 mb-6">Escolha como prefere ser atendido:</p>
+                                <h3 className="text-2xl font-bold text-theme mb-2 font-heading">Posso ajudar?</h3>
+                                <p className="text-base text-gray-500 mb-6">Escolha como prefere ser atendido:</p>
                                 
-                                <div className="space-y-3">
-                                    <button onClick={() => setView('busca')} className="w-full bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group">
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-orange-100 p-2 rounded-full text-orange-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="package-search" className="w-5 h-5"></i></div>
+                                <div className="space-y-4">
+                                    {/* Botão AUMENTADO: Texto maior, padding maior */}
+                                    <button onClick={() => setView('busca')} className="w-full bg-white border border-gray-200 p-5 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <div className="bg-orange-100 p-3 rounded-full text-orange-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="package-search" className="w-6 h-6"></i></div>
                                             <div className="text-left">
-                                                <p className="font-bold text-theme text-sm">Solicitar Busca</p>
-                                                <p className="text-xs text-gray-400">Enviar via Uber/Loggi</p>
+                                                <p className="font-bold text-theme text-lg">Solicitar Busca</p>
+                                                <p className="text-sm text-gray-500">Enviar via Uber/Loggi</p>
                                             </div>
                                         </div>
-                                        <i data-lucide="chevron-right" className="w-5 h-5 text-gray-300 group-hover:text-theme"></i>
+                                        <i data-lucide="chevron-right" className="w-6 h-6 text-gray-300 group-hover:text-theme"></i>
                                     </button>
 
-                                    <button onClick={() => setView('entrega')} className="w-full bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group">
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-green-100 p-2 rounded-full text-green-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="truck" className="w-5 h-5"></i></div>
+                                    <button onClick={() => setView('entrega')} className="w-full bg-white border border-gray-200 p-5 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <div className="bg-green-100 p-3 rounded-full text-green-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="truck" className="w-6 h-6"></i></div>
                                             <div className="text-left">
-                                                <p className="font-bold text-theme text-sm">Solicitar Entrega</p>
-                                                <p className="text-xs text-gray-400">Equipamento pronto</p>
+                                                <p className="font-bold text-theme text-lg">Solicitar Entrega</p>
+                                                <p className="text-sm text-gray-500">Equipamento pronto</p>
                                             </div>
                                         </div>
-                                        <i data-lucide="chevron-right" className="w-5 h-5 text-gray-300 group-hover:text-theme"></i>
+                                        <i data-lucide="chevron-right" className="w-6 h-6 text-gray-300 group-hover:text-theme"></i>
                                     </button>
 
-                                    {/* NOVA OPÇÃO: COMPRA DE PEÇAS */}
-                                    <a href={`https://wa.me/${WHATSAPP}?text=Olá, preciso comprar peças ou acessórios.`} target="_blank" className="w-full bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group">
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-purple-100 p-2 rounded-full text-purple-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="settings" className="w-5 h-5"></i></div>
+                                    {/* OPÇÃO: COMPRA DE PEÇAS */}
+                                    <a href={`https://wa.me/${WHATSAPP}?text=Olá, preciso comprar peças ou acessórios.`} target="_blank" className="w-full bg-white border border-gray-200 p-5 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <div className="bg-purple-100 p-3 rounded-full text-purple-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="settings" className="w-6 h-6"></i></div>
                                             <div className="text-left">
-                                                <p className="font-bold text-theme text-sm">Comprar Peças</p>
-                                                <p className="text-xs text-gray-400">Venda de acessórios</p>
+                                                <p className="font-bold text-theme text-lg">Comprar Peças</p>
+                                                <p className="text-sm text-gray-500">Venda de acessórios</p>
                                             </div>
                                         </div>
-                                        <i data-lucide="external-link" className="w-5 h-5 text-gray-300 group-hover:text-theme"></i>
+                                        <i data-lucide="external-link" className="w-6 h-6 text-gray-300 group-hover:text-theme"></i>
                                     </a>
 
-                                    <a href={`https://wa.me/${WHATSAPP}?text=Olá, gostaria de falar com um atendente.`} target="_blank" className="w-full bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group">
-                                        <div className="flex items-center gap-3">
-                                            <div className="bg-blue-100 p-2 rounded-full text-blue-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="message-circle" className="w-5 h-5"></i></div>
+                                    <a href={`https://wa.me/${WHATSAPP}?text=Olá, gostaria de falar com um atendente.`} target="_blank" className="w-full bg-white border border-gray-200 p-5 rounded-xl flex items-center justify-between hover:border-theme hover:bg-blue-50 transition group shadow-sm">
+                                        <div className="flex items-center gap-4">
+                                            <div className="bg-blue-100 p-3 rounded-full text-blue-600 group-hover:bg-theme group-hover:text-white transition"><i data-lucide="message-circle" className="w-6 h-6"></i></div>
                                             <div className="text-left">
-                                                <p className="font-bold text-theme text-sm">Falar com Atendente</p>
-                                                <p className="text-xs text-gray-400">Dúvidas gerais</p>
+                                                <p className="font-bold text-theme text-lg">Falar com Atendente</p>
+                                                <p className="text-sm text-gray-500">Dúvidas gerais</p>
                                             </div>
                                         </div>
-                                        <i data-lucide="external-link" className="w-5 h-5 text-gray-300 group-hover:text-theme"></i>
+                                        <i data-lucide="external-link" className="w-6 h-6 text-gray-300 group-hover:text-theme"></i>
                                     </a>
                                 </div>
                             </div>
@@ -150,26 +150,26 @@
                         {/* VISÃO 2: SOLICITAR BUSCA (Instruções) */}
                         {view === 'busca' && (
                             <div>
-                                <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-xs font-bold uppercase"><i data-lucide="arrow-left" className="w-4 h-4"></i> Voltar</button>
-                                <h3 className="text-xl font-bold text-theme mb-4 font-heading text-center">Enviar para Manutenção</h3>
+                                <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-sm font-bold uppercase"><i data-lucide="arrow-left" className="w-5 h-5"></i> Voltar</button>
+                                <h3 className="text-2xl font-bold text-theme mb-6 font-heading text-center">Enviar para Manutenção</h3>
                                 
-                                <div className="space-y-4 mb-6">
-                                    <div className="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                                        <span className="bg-theme text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                                        <p className="text-sm text-gray-600"><strong>Avise no WhatsApp:</strong> Confirme se estamos na loja para receber.</p>
+                                <div className="space-y-4 mb-8">
+                                    <div className="flex gap-3 bg-gray-50 p-4 rounded-lg">
+                                        <span className="bg-theme text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                                        <p className="text-base text-gray-600"><strong>Avise no WhatsApp:</strong> Confirme se estamos na loja para receber.</p>
                                     </div>
-                                    <div className="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                                        <span className="bg-theme text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                                        <p className="text-sm text-gray-600"><strong>Chame o Uber Flash:</strong> Destino: <b>{ENDERECO}</b>.</p>
+                                    <div className="flex gap-3 bg-gray-50 p-4 rounded-lg">
+                                        <span className="bg-theme text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                                        <p className="text-base text-gray-600"><strong>Chame o Uber Flash:</strong> Destino: <b>{ENDERECO}</b>.</p>
                                     </div>
-                                    <div className="flex gap-3 bg-gray-50 p-3 rounded-lg">
-                                        <span className="bg-theme text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                                        <p className="text-sm text-gray-600"><strong>Compartilhe:</strong> Mande o link da corrida pra gente acompanhar.</p>
+                                    <div className="flex gap-3 bg-gray-50 p-4 rounded-lg">
+                                        <span className="bg-theme text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                                        <p className="text-base text-gray-600"><strong>Compartilhe:</strong> Mande o link da corrida pra gente acompanhar.</p>
                                     </div>
                                 </div>
 
-                                <a href={`https://wa.me/${WHATSAPP}?text=Olá, vou enviar um aparelho por Uber Flash agora.`} target="_blank" className="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
-                                    <i data-lucide="message-circle"></i> Avisar Envio no WhatsApp
+                                <a href={`https://wa.me/${WHATSAPP}?text=Olá, vou enviar um aparelho por Uber Flash agora.`} target="_blank" className="block w-full bg-green-500 hover:bg-green-600 text-white text-center font-bold text-lg py-4 rounded-xl transition flex items-center justify-center gap-2">
+                                    <i data-lucide="message-circle" className="w-6 h-6"></i> Avisar Envio no WhatsApp
                                 </a>
                             </div>
                         )}
@@ -177,19 +177,19 @@
                         {/* VISÃO 3: SOLICITAR ENTREGA (Input OS) */}
                         {view === 'entrega' && (
                             <div>
-                                <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-xs font-bold uppercase"><i data-lucide="arrow-left" className="w-4 h-4"></i> Voltar</button>
+                                <button onClick={() => setView('menu')} className="text-gray-400 hover:text-theme mb-4 flex items-center gap-1 text-sm font-bold uppercase"><i data-lucide="arrow-left" className="w-5 h-5"></i> Voltar</button>
                                 <div className="text-center mb-6">
-                                    <h3 className="text-xl font-bold text-theme font-heading">Solicitar Entrega</h3>
-                                    <p className="text-sm text-gray-500 mt-1">Informe o número da sua Ordem de Serviço</p>
+                                    <h3 className="text-2xl font-bold text-theme font-heading">Solicitar Entrega</h3>
+                                    <p className="text-base text-gray-500 mt-2">Informe o número da sua Ordem de Serviço</p>
                                 </div>
 
-                                <div className="bg-gray-50 p-4 rounded-xl mb-6">
-                                    <label className="block text-xs font-bold text-gray-500 mb-2 uppercase">Número da O.S (Ex: 1234)</label>
+                                <div className="bg-gray-50 p-6 rounded-xl mb-6">
+                                    <label className="block text-sm font-bold text-gray-500 mb-2 uppercase">Número da O.S (Ex: 1234)</label>
                                     <input 
                                         type="text" 
                                         value={osNumber}
                                         onChange={(e) => setOsNumber(e.target.value)}
-                                        className="w-full bg-white border border-gray-300 rounded-lg p-3 text-lg font-bold text-theme focus:border-theme focus:ring-1 focus:ring-theme outline-none text-center placeholder-gray-300"
+                                        className="w-full bg-white border border-gray-300 rounded-lg p-4 text-2xl font-bold text-theme focus:border-theme focus:ring-1 focus:ring-theme outline-none text-center placeholder-gray-300"
                                         placeholder="0000"
                                     />
                                 </div>
@@ -197,9 +197,9 @@
                                 <a 
                                     href={`https://wa.me/${WHATSAPP}?text=Olá, gostaria de solicitar a entrega do equipamento referente à OS número: *${osNumber || 'NÃO INFORMADO'}*.`} 
                                     target="_blank" 
-                                    className={`block w-full text-white text-center font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 ${osNumber ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-300 cursor-not-allowed'}`}
+                                    className={`block w-full text-white text-center font-bold text-lg py-4 rounded-xl transition flex items-center justify-center gap-2 ${osNumber ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-300 cursor-not-allowed'}`}
                                 >
-                                    <i data-lucide="calendar"></i> Agendar Entrega
+                                    <i data-lucide="calendar" className="w-6 h-6"></i> Agendar Entrega
                                 </a>
                             </div>
                         )}
