@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="theme-color" content="#003366">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <title>Celpe - Clínica do Secador | Padrão Franquia</title>
     <meta name="description" content="Assistência técnica especializada. Medicina para seu secador e equipamentos.">
@@ -259,6 +257,7 @@
             );
         };
 
+        // --- CARROSSEL AJUSTADO PARA COMPUTADOR ---
         const HeroCarousel = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             const slides = [{ type: 'image', url: 'assets/foto-fundo.png' }, { type: 'image', url: 'assets/foto-fundo.png' }];
@@ -267,10 +266,12 @@
                 return () => clearInterval(timer);
             }, [slides.length]);
             return (
-                <div className="relative w-full h-[280px] md:h-[500px] overflow-hidden bg-gray-100 group border-b-4 border-theme">
+                /* AQUI FOI FEITA A CORREÇÃO: md:h-[700px] para mostrar o corpo no PC */
+                <div className="relative w-full h-[280px] md:h-[700px] overflow-hidden bg-gray-100 group border-b-4 border-theme">
                     {slides.map((slide, index) => (
                         <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
-                            <img src={slide.url} className="w-full h-full object-cover object-center md:object-top" alt="Banner" />
+                            {/* object-top garante que a cabeça sempre apareça, e a altura maior mostra o corpo */}
+                            <img src={slide.url} className="w-full h-full object-cover object-top" alt="Banner" />
                             <div className="absolute inset-0 bg-gradient-to-r from-theme/20 to-transparent"></div>
                         </div>
                     ))}
