@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="theme-color" content="#003366">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#003366">
+    <meta name="msapplication-navbutton-color" content="#003366">
     
     <title>Celpe - Clínica do Secador | Padrão Franquia</title>
     <meta name="description" content="Assistência técnica especializada. Medicina para seu secador e equipamentos.">
@@ -24,10 +25,10 @@
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Montserrat', sans-serif; }
         
-        /* Cores Oficiais */
+        /* CORES OFICIAIS */
         .text-theme { color: #003366; } 
         .bg-theme { background-color: #003366; }
-        .bg-accent { background-color: #f97316; } /* Laranja do Botão */
+        .bg-accent { background-color: #f97316; } 
         .text-accent { color: #f97316; }
         
         .glass-card {
@@ -59,55 +60,79 @@
         const WHATSAPP = "553132124480"; 
         const ENDERECO = "Rua São Paulo, 265 - Sobreloja - Centro, BH";
         
-        const Header = () => (
-            <div className="w-full sticky top-0 z-50 bg-white shadow-md">
-                
-                {/* 1. BARRA DE TOPO (Igual AmorSaúde - Cinza) - Apenas Desktop */}
-                <div className="bg-gray-50 py-2 hidden md:block border-b border-gray-100">
-                    <div className="container mx-auto px-4 flex justify-end gap-6 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                        <a href="#" className="hover:text-theme transition">Quem Somos</a>
-                        <a href="#" className="hover:text-theme transition">Unidades</a>
-                        <a href="#" className="hover:text-theme transition">Seja um Franqueado</a>
+        const Header = () => {
+            // Estado para controlar se o menu está aberto ou fechado
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            return (
+                <div className="w-full sticky top-0 z-50 bg-white shadow-md">
+                    
+                    {/* BARRA TOPO DESKTOP (Cinza) */}
+                    <div className="bg-gray-50 py-2 hidden md:block border-b border-gray-100">
+                        <div className="container mx-auto px-4 flex justify-end gap-6 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                            <a href="#" className="hover:text-theme transition">Quem Somos</a>
+                            <a href="#" className="hover:text-theme transition">Unidades</a>
+                            <a href="#" className="hover:text-theme transition">Seja um Franqueado</a>
+                        </div>
                     </div>
-                </div>
 
-                {/* 2. BARRA PRINCIPAL (LOGO + MENU) - BRANCA */}
-                <div className="bg-white py-3 md:py-5 relative z-20">
-                    <div className="container mx-auto px-4 flex justify-between items-center">
-                        
-                        {/* Logo */}
-                        <img src="assets/logo.png" alt="Celpe" className="h-10 md:h-14 w-auto object-contain" />
-                        
-                        {/* Menu Desktop */}
-                        <nav className="hidden md:flex gap-8 text-sm font-bold text-gray-500 font-heading tracking-wide">
-                            <a href="#" className="hover:text-theme transition uppercase">A Clínica</a>
-                            <a href="#procedimentos" className="hover:text-theme transition uppercase">Procedimentos</a>
-                            <a href="#unidades" className="hover:text-theme transition uppercase">Unidades</a>
-                            <a href="#contato" className="hover:text-theme transition uppercase">Contato</a>
-                        </nav>
+                    {/* BARRA PRINCIPAL (Branca) */}
+                    <div className="bg-white py-3 md:py-5 relative z-20">
+                        <div className="container mx-auto px-4 flex justify-between items-center">
+                            
+                            {/* Logo */}
+                            <img src="assets/logo.png" alt="Celpe" className="h-10 md:h-14 w-auto object-contain" />
+                            
+                            {/* Menu Desktop */}
+                            <nav className="hidden md:flex gap-8 text-sm font-bold text-gray-500 font-heading tracking-wide">
+                                <a href="#" className="hover:text-theme transition uppercase">A Clínica</a>
+                                <a href="#procedimentos" className="hover:text-theme transition uppercase">Procedimentos</a>
+                                <a href="#unidades" className="hover:text-theme transition uppercase">Unidades</a>
+                                <a href="#contato" className="hover:text-theme transition uppercase">Contato</a>
+                            </nav>
 
-                        {/* Botão Desktop */}
-                        <a href={`https://wa.me/${WHATSAPP}`} 
-                           className="hidden md:flex bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-full font-bold text-sm shadow-md transition transform hover:scale-105 items-center gap-2 font-heading tracking-wide">
-                            <i data-lucide="calendar-check" className="w-4 h-4"></i> AGENDAR AGORA
+                            {/* Botão Desktop */}
+                            <a href={`https://wa.me/${WHATSAPP}`} 
+                               className="hidden md:flex bg-accent hover:bg-orange-600 text-white px-8 py-3 rounded-full font-bold text-sm shadow-md transition transform hover:scale-105 items-center gap-2 font-heading tracking-wide">
+                                <i data-lucide="calendar-check" className="w-4 h-4"></i> AGENDAR AGORA
+                            </a>
+
+                            {/* BOTÃO MENU MOBILE (Hambúrguer) - Agora Azul (#003366) e Funcional */}
+                            <button 
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                className="md:hidden text-theme p-2 focus:outline-none"
+                            >
+                                {isMenuOpen ? (
+                                    <i data-lucide="x" className="w-9 h-9"></i> // Ícone X quando aberto
+                                ) : (
+                                    <i data-lucide="menu" className="w-9 h-9"></i> // Ícone Menu quando fechado
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* MENU DROPDOWN MOBILE (Abre quando clica no hambúrguer) */}
+                    {isMenuOpen && (
+                        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-30 animate-fade-in">
+                            <nav className="flex flex-col p-4 text-center space-y-4 font-bold text-theme font-heading uppercase tracking-wide">
+                                <a href="#" onClick={() => setIsMenuOpen(false)} className="py-2 border-b border-gray-50 hover:bg-gray-50">A Clínica</a>
+                                <a href="#procedimentos" onClick={() => setIsMenuOpen(false)} className="py-2 border-b border-gray-50 hover:bg-gray-50">Procedimentos</a>
+                                <a href="#unidades" onClick={() => setIsMenuOpen(false)} className="py-2 border-b border-gray-50 hover:bg-gray-50">Unidades</a>
+                                <a href="#contato" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-gray-50">Contato</a>
+                            </nav>
+                        </div>
+                    )}
+
+                    {/* BARRA DE AÇÃO MOBILE (Laranja) */}
+                    <div className="md:hidden bg-accent p-3">
+                         <a href={`https://wa.me/${WHATSAPP}`} 
+                            className="block w-full text-white text-center font-bold font-heading uppercase text-sm tracking-widest flex items-center justify-center gap-2">
+                            <i data-lucide="calendar" className="w-5 h-5"></i> Marque sua Triagem
                         </a>
-
-                        {/* Ícone Menu Mobile (Hambúrguer Cinza igual referência) */}
-                        <button className="md:hidden text-gray-400 p-2">
-                            <i data-lucide="menu" className="w-9 h-9"></i>
-                        </button>
                     </div>
                 </div>
-
-                {/* 3. BARRA DE AÇÃO MOBILE (LARANJA) - O "Segundo Cabeçalho" */}
-                <div className="md:hidden bg-accent p-3">
-                     <a href={`https://wa.me/${WHATSAPP}`} 
-                        className="block w-full text-white text-center font-bold font-heading uppercase text-sm tracking-widest flex items-center justify-center gap-2">
-                        <i data-lucide="calendar" className="w-5 h-5"></i> Marque sua Triagem
-                    </a>
-                </div>
-            </div>
-        );
+            );
+        };
 
         const HeroCarousel = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
