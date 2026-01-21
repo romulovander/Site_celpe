@@ -257,14 +257,21 @@
             );
         };
 
-        // --- CARROSSEL AJUSTADO PARA COMPUTADOR ---
+      // --- CARROSSEL AJUSTADO PARA COMPUTADOR ---
         const HeroCarousel = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
-            const slides = [{ type: 'image', url: 'assets/foto-fundo.png' }, { type: 'image', url: 'assets/foto-fundo.png' }];
+            
+            // CORREÇÃO: A lista abre com [ e fecha com ] no final de tudo
+            const slides = [
+                { type: 'image', url: 'assets/foto-fundo.png' }, 
+                { type: 'image', url: 'assets/banner2.png' } // Aqui vai o nome da sua segunda foto
+            ];
+
             useEffect(() => {
                 const timer = setInterval(() => setCurrentSlide((p) => (p === slides.length - 1 ? 0 : p + 1)), 5000);
                 return () => clearInterval(timer);
             }, [slides.length]);
+
             return (
                 /* AQUI FOI FEITA A CORREÇÃO: md:h-[700px] para mostrar o corpo no PC */
                 <div className="relative w-full h-[280px] md:h-[700px] overflow-hidden bg-gray-100 group border-b-4 border-theme">
