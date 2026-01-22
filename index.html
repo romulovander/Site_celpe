@@ -257,14 +257,13 @@
             );
         };
 
-      // --- CARROSSEL AJUSTADO PARA COMPUTADOR ---
+        // --- CARROSSEL ESTILO AMORSAÚDE (BOXED/ENCAIXOTADO) ---
         const HeroCarousel = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             
-            // CORREÇÃO: A lista abre com [ e fecha com ] no final de tudo
             const slides = [
                 { type: 'image', url: 'assets/foto-fundo.png' }, 
-                { type: 'image', url: 'assets/banner2.png' } // Aqui vai o nome da sua segunda foto
+                { type: 'image', url: 'assets/banner2.png' } 
             ];
 
             useEffect(() => {
@@ -273,15 +272,22 @@
             }, [slides.length]);
 
             return (
-                /* AQUI FOI FEITA A CORREÇÃO: md:h-[700px] para mostrar o corpo no PC */
-                <div className="relative w-full h-[280px] md:h-[700px] overflow-hidden bg-gray-100 group border-b-4 border-theme">
-                    {slides.map((slide, index) => (
-                        <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
-                            {/* object-top garante que a cabeça sempre apareça, e a altura maior mostra o corpo */}
-                            <img src={slide.url} className="w-full h-full object-cover object-top" alt="Banner" />
-                            <div className="absolute inset-0 bg-gradient-to-r from-theme/20 to-transparent"></div>
+                // Container Externo (Fundo Branco) com Padding inferior
+                <div className="w-full bg-white pb-0 md:pb-8">
+                    
+                    {/* Container Centralizador (Gera as faixas brancas laterais) */}
+                    <div className="container mx-auto px-0 md:px-4 md:mt-6">
+                        
+                        {/* O Banner em si: Arredondado e com Sombra no Desktop */}
+                        <div className="relative w-full h-[280px] md:h-[550px] overflow-hidden bg-gray-100 group md:rounded-2xl md:shadow-2xl">
+                            {slides.map((slide, index) => (
+                                <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
+                                    <img src={slide.url} className="w-full h-full object-cover object-top" alt="Banner" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-theme/20 to-transparent"></div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             );
         };
