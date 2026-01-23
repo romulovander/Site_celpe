@@ -268,7 +268,6 @@
             );
         };
 
-      // --- CARROSSEL AJUSTADO E MAIS ESTREITO ---
         const HeroCarousel = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
             
@@ -283,7 +282,6 @@
             }, [slides.length]);
 
             return (
-                /* AJUSTE AQUI: Altura reduzida de 700px para 500px para ficar mais estreito */
                 <div className="relative w-full h-[280px] md:h-[500px] overflow-hidden bg-gray-100 group">
                     {slides.map((slide, index) => (
                         <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
@@ -295,12 +293,12 @@
             );
         };
 
-        // --- SEÇÃO DE PASSOS ESTILO AMOR SAÚDE ---
+        // --- SEÇÃO DE PASSOS AJUSTADA (DESCIDA) ---
         const Steps = () => (
             <section id="como-funciona" className="relative z-30 pb-16">
                 <div className="container mx-auto px-4">
-                    {/* Margem negativa (-mt) para subir os cards em cima do banner */}
-                    <div className="-mt-12 md:-mt-20 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+                    {/* AQUI FOI FEITO O AJUSTE: reduzida a margem negativa para -mt-6 md:-mt-8 */}
+                    <div className="-mt-6 md:-mt-8 grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
                         {[
                             { step: "1", title: "Agendamento", text: "Fale no WhatsApp", icon: "calendar" }, 
                             { step: "2", title: "Triagem", text: "Diagnóstico técnico", icon: "activity" }, 
@@ -308,7 +306,6 @@
                             { step: "4", title: "Alta Médica", text: "Teste e Garantia", icon: "check-circle" }
                         ].map((item, i) => (
                             <div key={i} className="step-card rounded-2xl p-6 relative group flex items-center justify-start gap-4">
-                                {/* Número grande estilizado como na referência */}
                                 <div className="text-5xl md:text-6xl font-black text-cyan-500/20 group-hover:text-cyan-500/40 transition-colors leading-none shrink-0">
                                     {item.step}
                                 </div>
@@ -419,7 +416,6 @@
                     <Footer />
                     <ActionModal isOpen={isActionOpen} onClose={() => setIsActionOpen(false)} />
                     
-                    {/* BOTÃO FLUTUANTE AGORA ABRE O MENU "POSSO AJUDAR?" */}
                     <button onClick={() => setIsActionOpen(true)} className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-50 animate-bounce transition hover:scale-110">
                         <i data-lucide="message-circle" className="w-7 h-7"></i>
                     </button>
